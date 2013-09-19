@@ -2,10 +2,15 @@
 
 //conexión de la base de dattos  
 function conectar(){{  
-	   if (!($conexion = pg_connect("host=192.168.1.103  dbname=pangeapage port=5432 user=postgres password=p4ng34"))){
+	   if (!($conexion = mysql_connect("localhost","root","p4ng34","pangea"))){
 	       echo "No pudo conectarse al servidor";
 	       exit();
 	   }
+	    $bd = mysql_select_db("pangea", $conexion);
+      if (! $bd ){die ("ERROR AL CONECTAR CON LA BASE DE DATOS: ".mysql_error() );
+	  
+	  }
+	   
 	    return $conexion;
 	}
 }
@@ -193,19 +198,22 @@ function menu_principal($idm,$activo)
 		
 			
 		$query="SELECT a.menuid,a.nombre,a.submenu,a.enlace,a.orden,count(b.menuid) as cant 
-         FROM menu a full join menu b on a.menuid=b.submenu WHERE a.submenu=".$idm."  group by a.menuid,a.nombre,a.submenu,a.enlace,a.orden order by orden asc,nombre asc";
-		$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
-		$numerof=pg_num_rows($Qmenu);
+FROM menu a left join menu b on a.menuid=b.submenu WHERE a.submenu=".$idm."  group by a.menuid,a.nombre,a.submenu,a.enlace,a.orden order by orden asc,nombre asc";
+		
+		$Qmenu = mysql_query($query,$conex) or die(mysql_error());
+		$numerof=mysql_num_rows($Qmenu);
 		
 		if($numerof > 0){ 
 	
 		
 		      for($i=0;$i<$numerof;$i++)
 			  {
-				  	$row = pg_fetch_array($Qmenu,$i);
+				    mysql_data_seek($Qmenu,$i);
+				  	$row = mysql_fetch_array($Qmenu);
 	
-				     if($row['cant']==0)
+				     if($row["cant"]==0)
 					 {
+						 
 						if(strtolower($activo)==strtolower($row['nombre']))
 						   echo '<li class="active"><a href="'.$row['enlace'].'">'.$row['nombre'].'</a></li>';
                			else
@@ -245,9 +253,10 @@ function obtenerQuote()
 	$query="select informacion.titulo,informacion.descripcion
 from informacion,tipoinformacion 
 where lower(tipoinformacion.nombre)='quotes' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid
-order by random() limit 1 ;";
-	$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
-	return $row = pg_fetch_array($Qmenu,0);
+order by rand() limit 1 ;";
+	$Qmenu = mysql_query($query,$conex) or die(mysql_error());
+	mysql_data_seek($Qmenu,0);				  	
+	return $row = mysql_fetch_array($Qmenu);
 	
 	
 }
@@ -255,8 +264,9 @@ function obtenerSucursal($id)
 {
 	$conex = conectar();
 	$query="select * from sucursal where sucursalid=".$id;
-	$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
-	return $row = pg_fetch_array($Qmenu,0);
+	$Qmenu = mysql_query($query,$conex) or die(mysql_error());
+	mysql_data_seek($Qmenu,0);	
+	return $row = mysql_fetch_array($Qmenu);
 }
 function obtenerBanners()
 {
@@ -266,16 +276,17 @@ $conex = conectar();
 	$query="select informacion.titulo,informacion.descripcion,informacion.imagen
 from informacion,tipoinformacion 
 where lower(tipoinformacion.nombre)='noticia' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid;";
-$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+$Qmenu = mysql_query($query,$conex) or die(mysql_error());
 	
-$numerof=pg_num_rows($Qmenu);
+$numerof=mysql_num_rows($Qmenu);
 		
 		if($numerof > 0){ 
 	
 		
 		      for($i=0;$i<$numerof;$i++)
 		{	
-		$row = pg_fetch_array($Qmenu,$i);
+		mysql_data_seek($Qmenu,$i);		  	
+		$row = mysql_fetch_array($Qmenu);
 	
 	
        echo ' <div class="item';
@@ -326,9 +337,10 @@ $conex = conectar();
 	
 	$query="select informacion.titulo,informacion.descripcion,informacion.imagen
 from informacion,tipoinformacion 
-where lower(tipoinformacion.nombre)='noticia' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid order by random() limit 1;";
-$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
-$row = pg_fetch_array($Qmenu,0);
+where lower(tipoinformacion.nombre)='noticia' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid order by rand() limit 1;";
+$Qmenu = mysql_query($query,$conex) or die(mysql_error());
+mysql_data_seek($Qmenu,0);				  	
+$row = mysql_fetch_array($Qmenu);
 echo
  ' <div class="span6 animated fadeInDownBig">
            	<h2>'.$row[0].'</h2>
@@ -360,16 +372,17 @@ function carrusel()
 	$query="select informacion.titulo,informacion.descripcion,informacion.imagen,informacion.enlace
 from informacion,tipoinformacion 
 where lower(tipoinformacion.nombre)='carrusel' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid;";
-$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+$Qmenu = mysql_query($query,$conex) or die(mysql_error());
 	
-$numerof=pg_num_rows($Qmenu);
+$numerof=mysql_num_rows($Qmenu);
 		
 		if($numerof > 0){ 
 	
 		
 		      for($i=0;$i<$numerof;$i++)
 		{	
-				$row = pg_fetch_array($Qmenu,$i);
+		mysql_data_seek($Qmenu,$i);	
+				$row = mysql_fetch_array($Qmenu);
 	
 	echo ' <div class="ca-item ca-item-'.($i+1).'">
             <div class="ca-item-main">
@@ -399,16 +412,18 @@ function carruselMovil()
 	$query="select informacion.titulo,informacion.descripcion,informacion.imagen,informacion.enlace
 from informacion,tipoinformacion 
 where lower(tipoinformacion.nombre)='carrusel' and informacion.tipoinformacionid=tipoinformacion.tipoinformacionid;";
-$Qmenu = pg_query($conex,$query) or die(pg_last_error($conex));
+$Qmenu = mysql_query($query,$conex) or die(mysql_error());
 	
-$numerof=pg_num_rows($Qmenu);
+$numerof=mysql_num_rows($Qmenu);
 		
 		if($numerof > 0){ 
 	
 		
 		      for($i=0;$i<$numerof;$i++)
 		{	
-				$row = pg_fetch_array($Qmenu,$i);
+	         	mysql_data_seek($Qmenu,$i);	
+		
+				$row = mysql_fetch_array($Qmenu);
 	
 	echo ' <div class="span4 ca-item ca-item-'.($i+1).'">
             <div class="ca-item-main">

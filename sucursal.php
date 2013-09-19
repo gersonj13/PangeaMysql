@@ -35,7 +35,7 @@ if (isset($_POST["inicio"])) {
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
 
 </head>
-<body onLoad="setTimeout('initialize( <?php echo $sucursal[6]; ?>, <?php echo $sucursal[7]; ?>)',1000);">
+<body onLoad="setTimeout('initialize(<?php echo $sucursal[6]; ?>,<?php echo $sucursal[7]; ?>)',1000);">
 
 
      
