@@ -123,13 +123,14 @@ if (isset($_POST["inicio"])) {
 				<nav id="website-nav" class="sidebar-nav">
 					<ul id="website-nav" class="nav nav-list">
         				<?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id']." ORDER BY informacionid";
-						$result=pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-						$registros=pg_num_rows($result);
+						$result=mysql_query ($SQL,$conn) or die("Error en la consulta SQL");
+						$registros=mysql_num_rows($result);
 						$m=0;
 						if($registros!=0){?>
 							<div class="accordion" id="accordion2">
        						 <?php for ($i=0;$i<$registros;$i++){
-								$row = pg_fetch_array($result);
+								 mysql_data_seek($result,$i);
+								$row = mysql_fetch_array($result);
 								if($row['titulo']=="Nosotros"){?>
                                     <br>
 									<li class="nav-header">Nosotros</li>
@@ -149,12 +150,14 @@ if (isset($_POST["inicio"])) {
   <?php  
 		
 	$SQL="SELECT * FROM  informacion WHERE tipoinformacionid=".$_GET['id']." ORDER BY informacionid";
-	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-	$registros= pg_num_rows($result);
+	$result = mysql_query ($SQL,$conn ) or die("Error en la consulta SQL");
+	$registros= mysql_num_rows($result);
 		
 	if($registros != 0){
 		for ($i=0;$i<$registros;$i++){
-			$row = pg_fetch_array ($result,$i);
+		  mysql_data_seek($result,$i);
+				  
+		$row = mysql_fetch_array ($result);
 			if($row['titulo']=="Nosotros"){?>
 				<div id="<?php echo $row['informacionid'];?>" class="span12">
                   	<br>

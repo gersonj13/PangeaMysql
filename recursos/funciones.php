@@ -16,7 +16,7 @@ function conectar(){{
 }
 //desconectar la base de datos
 function desconectar($conexion){
-	pg_close($conexion);
+	mysql_close($conexion);
 	
 }
 
@@ -49,10 +49,10 @@ function validarlogin(){
 		$usu = $_SESSION["usuarioadmin"];
 		$pass = $_SESSION["passwordadmin"];
 		$query="SELECT * FROM administrador WHERE usuario='$usu' AND contrasena='$pass'";
-		$Qlogin = pg_query($conex,$query) or die(pg_last_error($conex));
-		$fila = pg_fetch_array($Qlogin);
+		$Qlogin = mysql_query($conex,$query) or die("Error con Mysql");
+		$fila = mysql_fetch_array($Qlogin);
 		
-		if(pg_num_rows($Qlogin) == 0){
+		if(mysql_num_rows($Qlogin) == 0){
 			javaalert('Usuario o Contraseña invalida!');
 			quitarsesion();
 			return false;
@@ -74,9 +74,9 @@ function validarlogincliente(){
 		$usu = $_SESSION["usuario_cliente"];
 		$pass = $_SESSION["passwordcliente"];	
 		$query="SELECT * FROM usuario WHERE usuario='$usu' AND contrasena='$pass'";
-		$Qlogin = pg_query($conex,$query) or die(pg_last_error($conex));
-		$fila = pg_fetch_array($Qlogin);	
-		if(pg_num_rows($Qlogin) == 0){
+		$Qlogin = mysql_query($query,$conex) or die("Error Mysql");
+		$fila = mysql_fetch_array($Qlogin);	
+		if(mysql_num_rows($Qlogin) == 0){
 			javaalert('Usuario o Contraseña invalida!');
 			quitarsesioncliente();
 			return false;
@@ -148,10 +148,10 @@ function javaalert($msj){
 function supera($tipoad){
 	$conn = Conectar();
 	$SQL9="SELECT * FROM administrador WHERE tipoadministradorid=".$tipoad;
-		$result9 = pg_query ($conn, $SQL9) or die("Error en la consulta SQL");
-		$row9 = pg_fetch_array ($result9);
-		$reg= pg_num_rows($result9);
-		      if($reg= pg_num_rows($result9)){
+		$result9 = mysql_query ( $SQL9,$conn) or die("Error en la consulta SQL");
+		$row9 = mysql_fetch_array ($result9);
+		$reg=mysql_num_rows($result9);
+		      if($reg= mysql_num_rows($result9)){
 				  if($row9['tipoadministradorid']==1){
 					  return true;
 				  }else{
@@ -187,7 +187,7 @@ function llenarLog($accion,$descripcion){
 			break;	
 		}
 		
-pg_query($conex,"INSERT INTO bitacora values(nextval('bitacora_bitacoraid_seq'),'".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')") or die(pg_last_error($conex));
+mysql_query("INSERT INTO bitacora values(nextval('bitacora_bitacoraid_seq'),'".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')",$conex) or die("Error Bitacora");
 
 }
 //Traer Menu principal

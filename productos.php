@@ -121,12 +121,13 @@ if (isset($_POST["inicio"])) {
 
          <?php 
 		$SQL="SELECT * FROM producto";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);	
+		$result = mysql_query ($SQL,$conn) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);	
 		if($registros != 0){				 		
 		for ($i=0;$i<$registros;$i++)
 			{	
-			$row = pg_fetch_array ($result,$i);
+			mysql_data_seek($result,$i);	
+			$row = mysql_fetch_array ($result);
 			if(strlen ($row[2])>200){
 				$descripcion=substr($row[2],0,200)."...";
 			}else{

@@ -114,8 +114,8 @@ if (isset($_POST["inicio"])) {
         <nav id="website-nav" class="sidebar-nav">
           <ul id="website-nav" class="nav nav-list">
             <?php $SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ($SQL,$conn) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 		$m=0;
 	if($registros != 0){
 		?>
@@ -123,7 +123,8 @@ if (isset($_POST["inicio"])) {
             <?php
 			for ($i=0;$i<$registros;$i++)
 			{
-				$row = pg_fetch_array ($result,$i);
+				mysql_data_seek($result,$i);	
+				$row = mysql_fetch_array($result);
 				
 				if($row['titulo']=="Servicios"){
 					?>
@@ -159,13 +160,14 @@ if (isset($_POST["inicio"])) {
       <?php  
 		
 		$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ($SQL,$conn) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 		
 	if($registros != 0){
 			for ($i=0;$i<$registros;$i++)
 			{
-				$row = pg_fetch_array ($result,$i);
+				mysql_data_seek($result,$i);	
+				$row = mysql_fetch_array ($result);
 				
 				if($row['titulo']=="Servicios"){
 					?>
@@ -184,8 +186,8 @@ if (isset($_POST["inicio"])) {
 			
 			
 			$SQL="SELECT * FROM  informacion WHERE  tipoinformacionid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ( $SQL,$conn) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 		
 	if($registros != 0){
 		?>
@@ -195,9 +197,12 @@ if (isset($_POST["inicio"])) {
         <?php
 			for ($i=0;$i<$registros;$i++)
 			{
-				$row = pg_fetch_array ($result,$i);
+				mysql_data_seek($result,$i);	
+				$row = mysql_fetch_array ($result);
 				if($i<$registros-1){
-					$row2 = pg_fetch_array ($result,$i+1);
+					mysql_data_seek($result,$i+1);	
+				
+					$row2 = mysql_fetch_array ($result);
 				}
 				
 				if($row['titulo']!="Servicios"){

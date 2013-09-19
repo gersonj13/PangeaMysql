@@ -112,9 +112,9 @@ if (isset($_POST["inicio"])) {
 <div class="container" style="background-color:white;">
   <?php
    	$consulta="SELECT * FROM producto WHERE productoid=".$_GET['id'];
-	$resulta = pg_query ($conn, $consulta) or die("Error en la consulta SQL");
+	$resulta = mysql_query ( $consulta,$conn) or die("Error en la consulta SQL");
 			
-	if($row=pg_fetch_array($resulta)){
+	if($row=mysql_fetch_array($resulta)){
 		?>
  <div> 
  	<h2 class="well" align="left">
@@ -136,9 +136,9 @@ if (isset($_POST["inicio"])) {
 			$usuario=$_SESSION["id_cliente"];
 			$producto=$_GET['id'];
 			$query="SELECT * FROM usuarioproducto WHERE usuarioid=$usuario AND productoid=$producto";
-			$Qlogin = pg_query($conn,$query) or die(pg_last_error($conn));
-			$fila = pg_fetch_array($Qlogin);
-					if(pg_num_rows($Qlogin) > 0){
+			$Qlogin = mysql_query($query,$conn) or die(mysql_error());
+			$fila = mysql_fetch_array($Qlogin);
+					if(mysql_num_rows($Qlogin) > 0){
 					?>
                      <p>
                     <div class="span12" align="justify">Enlace:<a href="<?php echo $row['enlace'];?>"><?php echo $row['enlace'];?></div>   
