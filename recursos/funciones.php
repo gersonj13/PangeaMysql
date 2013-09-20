@@ -165,7 +165,7 @@ function supera($tipoad){
 //bitacora del  sitio web
 function llenarLog($accion,$descripcion){
 
-	$conex = Conectar();
+	$conex = conectar();
 		switch($accion){
 		case 1:
 			$accion="INSERCIÓN";
@@ -180,7 +180,7 @@ function llenarLog($accion,$descripcion){
 			$accion="INICIO DE SESIÓN";
 			break;
 		case 5:
-			$accion="FIN DE SESIÓN";
+			$accion="FIN DE SESION";
 			break;
 		case 6:
 			$accion="VACIO DE BITACORA";

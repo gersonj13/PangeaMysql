@@ -12,7 +12,7 @@ if (isset($_POST["Biniciar"])) {
 
     if (crearsesion($user, $pass)) {
         if (validarlogin()) {
-            llenarLog(4, "Inicio sesión");  
+            llenarLog(4, "Inicio sesion");  
 			iraURL('../administrator/principal.php');
         }
     }else {
