@@ -23,9 +23,10 @@ if(isset($_POST["guardar"])){
 	
 	$resultado=mysql_query("INSERT INTO sucursal values(default,'$nombre','$direccion','$telefono','$correo','','$latitud','$longitud','$descripcion')",$conn) or die(mysql_error($conn));
 	
-	$sql_select="SELECT last_value FROM sucursal_sucursalid_seq;";
-	$results=mysql_query($sql_select,$conn);
-	$arreglo=mysql_fetch_array($results);
+	$rs = mysql_query("SELECT MAX(sucursalid) AS id FROM sucursal");
+        if ($row = mysql_fetch_row($rs)) {
+       $arreglo = trim($row[0]); 
+		}
 	
 	if($_FILES['imagen']['name']!=""){
 		
@@ -50,7 +51,7 @@ if(isset($_POST["guardar"])){
 		if($error==UPLOAD_ERR_OK){ 
 			//Nueva función
 			move_uploaded_file($imagen,$uploadfile);		
-			$sql_update="update sucursal set imagen='".$uploadfile2."' WHERE sucursalid=".$arreglo[0]."";
+			$sql_update="update sucursal set imagen='".$uploadfile2."' WHERE sucursalid=".$arreglo."";
 			$result= mysql_query( $sql_update,$conn);
 																													
 			}		
@@ -80,7 +81,7 @@ if(isset($_POST["guardar2"])){
 	
 	$resultado=mysql_query("INSERT INTO sucursal values(default,'$nombre','$direccion','$telefono','$correo','','$latitud','$longitud','$descripcion')",$conn) or die(mysql_error($conn));
 	
-	 $rs = mysql_query("SELECT MAX(id_tabla) AS id FROM tabla");
+	$rs = mysql_query("SELECT MAX(sucursalid) AS id FROM sucursal");
         if ($row = mysql_fetch_row($rs)) {
        $arreglo = trim($row[0]); 
 		}

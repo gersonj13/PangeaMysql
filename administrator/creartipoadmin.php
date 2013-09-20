@@ -31,7 +31,7 @@ if(isset($_POST["guardar2"])){
 	
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
-        mysql_query($conn,"INSERT INTO tipoadministrador values(default,'$nombre','$descripcion')",$conn) or die(mysql_error($conn));
+        mysql_query("INSERT INTO tipoadministrador values(default,'$nombre','$descripcion')",$conn) or die(mysql_error($conn));
 		
 		llenarLog(1, "Tipo Administrador");
 		javaalert("El tipo de información fue creado con exito");
