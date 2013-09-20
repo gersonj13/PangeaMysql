@@ -12,7 +12,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		
 if(isset($_POST["si"])){
 	   $SQL="DELETE FROM producto WHERE productoid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$result =mysql_query($SQL,$conn) or die(mysql_error($conn));
+
 		llenarLog(3, "Producto");
 		javaalert("El producto fue eliminado");
 		iraURL("producto.php");
@@ -93,6 +94,17 @@ if(isset($_POST["no"])){
     <div class="span9">
    
         <?php 
+		
+		   $cons="SELECT * FROM producto WHERE productoid=".$_GET['id'];
+		$resulta = mysql_query($cons,$conex) or die(mysql_error($conex));
+		$registros=mysql_num_rows($resulta);
+		
+						if($registros!=1){
+							iraURL("producto.php");
+							}
+					$row = mysql_fetch_array($resulta);
+					
+					
 		
 		 $SQL="SELECT * FROM producto WHERE productoid=".$_GET['id'];
 		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");

@@ -2,7 +2,7 @@
 session_start();
 
 include("../recursos/funciones.php");
-$conn=conectar();
+$conex=conectar();
 if(!isset($_GET["id"])){
 	iraURL('producto.php');
 	}
@@ -17,7 +17,8 @@ if(isset($_POST["guardar"])){
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['redactor'];
 		$enlace=$_POST['enlace'];
-        $resultado=pg_query($conn,"UPDATE producto SET nombre='$nombre', descripcion='$descripcion' , enlace='$enlace' where productoid=$id") or die(pg_last_error($conn));
+        $update="UPDATE producto SET nombre='$nombre', descripcion='$descripcion' , enlace='$enlace' where productoid=$id";
+		$resultado=mysql_query($update,$conex) or die (mysql_error($conex));
 		if($resultado){
 		if($_FILES['imagen']['name']!=""){		
 		$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
@@ -42,7 +43,7 @@ if(isset($_POST["guardar"])){
 			//Nueva función
 			move_uploaded_file($imagen,$uploadfile);		
 			$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=".$_GET['id'];
-			$result= pg_query($conn, $sql_update);
+		$resultado=mysql_query($sql_update,$conex) or die (mysql_error($conex));
 																													
 			}		
 		 }			
@@ -124,13 +125,14 @@ if(isset($_POST["guardar"])){
     <div class="span9">
       <div class="well well-large">
        <?php
-        	$cons="SELECT * FROM producto WHERE productoid=".$_GET['id'];
-			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
-			$registros= pg_num_rows($resulta);
+        $cons="SELECT * FROM producto WHERE productoid=".$_GET['id'];
+		$resulta = mysql_query($cons,$conex) or die(mysql_error($conex));
+		$registros=mysql_num_rows($resulta);
+		
 						if($registros!=1){
 							iraURL("producto.php");
 							}
-			$row=pg_fetch_array($resulta)
+					$row = mysql_fetch_array($resulta);
 		?>
       <form enctype="multipart/form-data" method="post">
           <div class="row-fluid">

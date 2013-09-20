@@ -80,6 +80,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span9">
     <?php 
 	$SQL="SELECT * FROM producto";
+	
+	$result = mysql_query($SQL,$conn) or die(mysql_error());
+	$registros=mysql_num_rows($result);
+	
 	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
 	$registros= pg_num_rows($result);
 	if($registros == 0){
@@ -126,9 +130,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <?php    
 		for ($i=0;$i<$registros;$i++)
 			{
-
-			$row = pg_fetch_array ($result,$i );
-			
+					mysql_data_seek($result,$i);
+				  	$row = mysql_fetch_array($result);			
 			echo '<tr>';
 			echo '<td width="7%">'.$row[0].'</td>';
 			echo '<td width="15%">'.$row[1].'</td>';

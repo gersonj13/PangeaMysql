@@ -12,11 +12,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	if(isset($_POST["nombre"]) && $_POST["nombre"]!="" && isset($_POST["redactor"]) && $_POST["redactor"]!="" && isset($_POST["enlace"]) && $_POST["enlace"]!="" ){		
 				$insertar = "insert into producto values(nextval('producto_productoid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."','".$_POST['enlace']."','');";
 				$conex=conectar();
-				pg_query($conex,$insertar) or die (pg_last_error($conex));
-				$sql_select="SELECT last_value FROM producto_productoid_seq;";
-				$results=pg_query($conn, $sql_select);
-				$arreglo=pg_fetch_array($results,0);
-				
+				mysql_query($insertar,$conex) or die (mysql_error($conex));
+				//$sql_select="SELECT last_value FROM producto_productoid_seq;";				
+				$results = mysql_query($sql_select,$conn) or die(mysql_error());
+				mysql_data_seek($results,0);
+				$arreglo = mysql_fetch_array($results);
 				if($_FILES['imagen']['name']!=""){
 					
 					$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
