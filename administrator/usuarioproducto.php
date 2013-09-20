@@ -14,7 +14,7 @@ if(isset($_POST["guardar"])){
 		$producto=$_POST["producto"];
 		$usuario=$_GET["id"];
 		$insertar="INSERT INTO usuarioproducto values(default,$usuario,$producto)";
-		mysql_query($insertar,$conn) or die (mysql_error($conn));
+		$resultado=mysql_query($insertar,$conn) or die (mysql_error($conn));
 		if($resultado){			
 			llenarLog(1, "USUARIOPRODUCTO");	
 		}

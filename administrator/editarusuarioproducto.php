@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include("../recursos/funciones.php");
 $conn=conectar();
 if(!isset($_GET["id"])){
@@ -116,9 +115,10 @@ if(isset($_POST["guardar"])){
 							echo '<option value="'.$row3['productoid'].'">'.$row3['nombre'].'</option>';
                         
                         }
-						$SQL="SELECT producto.productoid,nombre FROM producto where productoid NOT IN (SELECT productoid FROM usuarioproducto where usuarioid=".$_SESSION["usuarioid"].")";
+						
+						$SQL="SELECT producto.productoid,nombre FROM producto where productoid NOT IN (SELECT productoid FROM usuarioproducto where usuarioid=".$_GET["idusuario"].")";
 						$resultpro = mysql_query($SQL,$conn) or die(mysql_error($conn));
-						while($rowpro=mysql_num_rows($resultpro)){
+						while($rowpro=mysql_fetch_array($resultpro)){
 							echo '<option value="'.$rowpro['productoid'].'">'.$rowpro['nombre'].'</option>';
 							}
 						?>
