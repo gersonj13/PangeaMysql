@@ -2,7 +2,7 @@
 session_start();
 include("recursos/funciones.php");
 $conn=conectar();
-//inicio de sesión 
+//inicio de sesiÃ³n 
 if (isset($_POST["inicio"])) {
    iniciosesion_cliente($_POST["usuario"],$_POST["password"]);
 }
@@ -14,7 +14,7 @@ if (isset($_POST["inicio"])) {
 <meta name="description" content="Pagina Web"/>
 <meta name="author" content="Pangea Technologies"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta charset="iso-8859-1" />
+<meta charset="utf-8" />
 <link rel=StyleSheet href="recursos/css/bootstrap.min.css" type="text/css" />
 <link rel=StyleSheet href="recursos/animate/animate.css" type="text/css" />
 <link rel=StyleSheet href="recursos/css/estilogeneral.css" type="text/css" />
@@ -60,7 +60,7 @@ if (isset($_POST["inicio"])) {
 						'.$_SESSION["nombre"].' '.$_SESSION["apellido"].'
 						<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-						<li><a href="recursos/quitarsesioncliente.php?pagina=../index.php">Cerrar Sesión</a></li>
+						<li><a href="recursos/quitarsesioncliente.php?pagina=../index.php">Cerrar SesiÃ³n</a></li>
 						  </ul></li>';			
 				  }else{ ?>
                 <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Iniciar Sesi&oacute;n <b class="caret"></b></a>
@@ -70,9 +70,9 @@ if (isset($_POST["inicio"])) {
                       <form method="post">
                         <dl>
                           <dt><span>Nombre de usuario</span></dt>
-                          <dd><input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" autofocus required></dd>
+                          <dd><input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es MayÃºscula(letras, puntos o nÃºmeros)" maxlength="34" pattern="[A-ZÃ‘]{1}[a-z.Ã±0-9]{1,33}" autofocus required></dd>
                           <dt>    <span>Contrase&ntilde;a</span></dt>
-                         <dd>     <input type="password"  placeholder="Contraseña" name="password" id="password" maxlength="34"  title="Debe agregar la contraseña" required></dd>
+                         <dd>     <input type="password"  placeholder="ContraseÃ±a" name="password" id="password" maxlength="34"  title="Debe agregar la contraseÃ±a" required></dd>
                          <dt>         </dt>
                          <dd><button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesi&oacute;n</button>
                      </dd>

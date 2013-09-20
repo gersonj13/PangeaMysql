@@ -12,18 +12,18 @@ if (isset($_POST["Biniciar"])) {
 
     if (crearsesion($user, $pass)) {
         if (validarlogin()) {
-            llenarLog(4, "Inicio sesión");  
+            llenarLog(4, "Inicio sesi�n");  
 			iraURL('../administrator/principal.php');
         }
     }else {
-	javaalert("Debe agregar el usuario y contraseña");
+	javaalert("Debe agregar el usuario y contrase�a");
 		}
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="iso-8859-1">
     <title>:: Pangea Technologies ::</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -50,10 +50,10 @@ if (isset($_POST["Biniciar"])) {
     <div class="container" align="center">
 
       <form class="form-signin" method="post">
-        <h3 class="form-signin-heading">Por favor, inicie sesión</h3>
-        <input type="text" class="input-block-level" placeholder="Usuario" name="usuario" id="usuario" maxlength="34" pattern="[a-z.ñ]{1,34}" title="Solo se admite minusculas y puntos" autofocus required>
-        <input type="password" class="input-block-level" placeholder="Contraseña" name="password" id="password" maxlength="34" pattern="[A-Za-z.0-9ñÑ]{1,34}" required>
-        <button class="btn btn-large btn-primary" type="submit" name="Biniciar">Iniciar Sesión</button>
+        <h3 class="form-signin-heading">Por favor, inicie sesi&oacute;n</h3>
+        <input type="text" class="input-block-level" placeholder="Usuario" name="usuario" id="usuario" maxlength="34" pattern="[a-z.�]{1,34}" title="Solo se admite minusculas y puntos" autofocus required>
+        <input type="password" class="input-block-level" placeholder="Contrase�a" name="password" id="password" maxlength="34" pattern="[A-Za-z.0-9��]{1,34}" required>
+        <button class="btn btn-large btn-primary" type="submit" name="Biniciar">Iniciar Sesi&oacute;n</button>
       </form>
 
     </div> <!-- /container -->
