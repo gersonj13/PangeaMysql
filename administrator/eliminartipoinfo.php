@@ -101,10 +101,9 @@ if(isset($_POST["no"])){
 			iraURL("tipoinfo.php");
 			}
 		
-		$SQL2="SELECT * FROM informacion  WHERE informacionid=".$_GET['id'];
+		$SQL2="SELECT * FROM informacion  WHERE tipoinformacionid=".$_GET['id'];
 		$result2 = mysql_query($SQL2,$conn) or die(mysql_error($conn));
 		$registros2=mysql_num_rows($result2);
-		
 		if($registros2!=0){
 		 ?>  
             
