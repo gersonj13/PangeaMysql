@@ -11,8 +11,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
   }else {
 	  
 	  $SQLi="SELECT * FROM sucursal WHERE sucursalid=".$_GET['id'];
-		$resulti = pg_query ($conn, $SQLi ) or die("Error en la consulta SQL");
-		$registrosi= pg_num_rows($resulti);
+		$resulti = mysql_query ($SQLi ,$conn) or die("Error en la consulta SQL");
+		$registrosi= mysql_num_rows($resulti);
 		if($registrosi==0){
 		  iraURL('../administrator/sucursal.php');	
 		}
@@ -97,9 +97,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <?php 
 		
 		 $SQL="SELECT * FROM sucursal WHERE sucursalid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-		$row = pg_fetch_array ($result);
+		$result = mysql_query ( $SQL,$conn ) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
+		$row = mysql_fetch_array ($result);
 		
 		
 		
@@ -172,7 +172,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		
 if(isset($_POST["si"])){
 	   $SQL="DELETE FROM sucursal WHERE sucursalid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$result = mysql_query ( $SQL,$conn ) or die("Error en la consulta SQL");
 		llenarLog(3, "sucursal");
 		javaalert("sucursal fue eliminado");
 		iraURL("sucursal.php");

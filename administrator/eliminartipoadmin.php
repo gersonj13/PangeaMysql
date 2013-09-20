@@ -11,7 +11,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
   }else {
 	  
 	  $SQLi="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
-		$resulti = mysql_query ($conn, $SQLi ) or die("Error en la consulta SQL");
+		$resulti = mysql_query ( $SQLi,$conn ) or die("Error en la consulta SQL");
 		$registrosi= mysql_num_rows($resulti);
 		if($registrosi==0){
 		 iraURL('../administrator/tipoadmin.php');	

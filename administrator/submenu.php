@@ -19,8 +19,9 @@ if(isset($_POST["guardar"])){
 		$submenu=$_GET["id"];
 		$admin=$_SESSION["id_usuario"];
 		$enla=$_POST['enlace'];
-		
-	$resultado=mysql_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enla')") or die(mysql_error($conn));
+		$orden=100;
+		echo "INSERT INTO menu values(default,'$nombre','$submenu','$admin','$enla')";
+	$resultado= mysql_query("INSERT INTO menu values(default,'$nombre','$submenu','$admin','$enla','$orden')",$conn)or die(mysql_error($conn));
 	
 	if($resultado){
 			
@@ -115,7 +116,7 @@ if(isset($_POST["guardar"])){
 		  
 		for ($i=0;$i<$registros;$i++)
 			{
-			$row = mysql_fetch_array ($result,$i );
+			$row = mysql_fetch_array ($result);
 			
 			if($row["submenu"]==$_GET['id']){
 				$aux=$aux+1;
@@ -173,7 +174,7 @@ if(isset($_POST["guardar"])){
 		for ($i=0;$i<$registros;$i++)
 			{
 
-			$row = mysql_fetch_array ($result,$i );
+			$row = mysql_fetch_array ($result);
 			
 			
 			
@@ -183,13 +184,13 @@ if(isset($_POST["guardar"])){
 			
 	      echo '<td width="16%">'.$row["nombre"].' </td> </a>';
 		   $SQL7="SELECT * FROM menu WHERE menuid=".$_GET["id"];
-		$result7 = mysql_query ($conn, $SQL7 ) or die("Error en la consulta SQL");
+		$result7 = mysql_query ( $SQL7, $conn) or die("Error en la consulta SQL");
 		$row7 = mysql_fetch_array ($result7);
 		   echo '<td width="16%">'.$row7["nombre"].' </td> </a>';
 		 
 		  		 
 			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
-		$result3 = mysql_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
+		$result3 = mysql_query ( $SQL3,$conn ) or die("Error en la consulta SQL");
 		$row3 = mysql_fetch_array ($result3);
 		echo '<td width="30">'.$row3["nombre"].' </td>';
 		echo '<td width="30">'.$row["enlace"].' </td>';	 

@@ -85,7 +85,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <?php 
 		
 		$SQL="SELECT * FROM sucursal";
-		$result = mysql_query ($conn,$SQL) or die("Error en la consulta SQL");
+		$result = mysql_query ($SQL,$conn) or die("Error en la consulta SQL");
 		$registros= mysql_num_rows($result);
 		
 	if($registros == 0){
@@ -141,7 +141,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		for ($i=0;$i<$registros;$i++)
 			{
 
-			$row = mysql_fetch_array ($result,$i );
+			$row = mysql_fetch_array ($result);
 			
 			echo '<tr>';
 			echo '<td width="10%">'.$row["sucursalid"].'</td>';

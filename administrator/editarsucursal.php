@@ -35,7 +35,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	
 
 	
-	$resultado=mysql_query($conn,"UPDATE sucursal SET  nombre='$nombres',direccion='$direccion',telefono='$telefono',correo='$correo',latitud='$latitud',longitud='$longitud',descripcion='$descripcion' where sucursalid=$id") or die(mysql_error($conn));
+	$resultado=mysql_query("UPDATE sucursal SET  nombre='$nombres',direccion='$direccion',telefono='$telefono',correo='$correo',latitud='$latitud',longitud='$longitud',descripcion='$descripcion' where sucursalid=$id",$conn) or die(mysql_error($conn));
 	$arreglo=$id;
 	
 	if($_FILES['imagen']['name']!=""){

@@ -20,7 +20,7 @@ if(isset($_POST["guardar"])){
 		$enlace=$_POST['enlace'];
 		$orden="100";
 		$admin=$_SESSION["id_usuario"];
-        mysql_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enlace','$orden')") or die(mysql_error($conn));
+        mysql_query("INSERT INTO menu values(default,'$nombre','$submenu','$admin','$enlace','$orden')",$conn) or die(mysql_error($conn));
 llenarLog(1, "creo menu");
 
 javaalert("El menu fue creado con exito");
@@ -43,7 +43,7 @@ if(isset($_POST["guardar2"])){
 		$enlace=$_POST['enlace'];
 		$orden="100";
 		$admin=$_SESSION["id_usuario"];
-        mysql_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enlace','$orden')") or die(mysql_error($conn));
+        mysql_query($conn,"INSERT INTO menu values(default,'$nombre','$submenu','$admin','$enlace','$orden')",$conn) or die(mysql_error($conn));
 llenarLog(1, "creo menu");
 javaalert("El menu fue creado con exito");
 iraURL("crearmenu.php");

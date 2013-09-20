@@ -136,7 +136,7 @@ if(isset($_GET['b']))
 		for ($i=0;$i<$registros;$i++)
 			{
 
-			$row = mysql_result($result,$i );
+			$row = mysql_fetch_array($result);
 			 if($row["submenu"]=="0"){
 			echo '<tr>';
 			echo '<td width="10%">'.$row["menuid"].'</td>';
@@ -144,7 +144,7 @@ if(isset($_GET['b']))
 			echo'<td width="5%"> <a href="submenu.php?id='.$row["menuid"].'"> <i id="add" class="icon-plus" /> </td> </a>';
 			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
 		$result3 = mysql_query ($SQL3,$conn) or die("Error en la consulta SQL");
-		$row3 = mysql_result ($result3);
+		$row3 = mysql_fetch_array($result3);
 		echo '<td width="10%">'.$row3["nombre"].' </td>';
 		echo '<td width="15%">'.$row["enlace"].' </td>';	
 		echo '<td width="4%">'.$row["orden"].' </td>';	  

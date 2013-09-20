@@ -154,7 +154,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		for ($i=0;$i<$registros;$i++)
 			{
 
-			$row = pg_fetch_array ($result,$i );
+			$row = mysql_fetch_array ($result);
 			
 			echo '<tr>';
 			echo '<td width="10%">'.$row["tipoadministradorid"].'</td>';

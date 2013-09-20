@@ -11,7 +11,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
   }else {
 	  
 	  $SQLi="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
-		$resulti = mysql_query ($conn, $SQLi ) or die("Error en la consulta SQL");
+		$resulti = mysql_query ( $SQLi,$conn ) or die("Error en la consulta SQL");
 		$registrosi= mysql_num_rows($resulti);
 		if($registrosi==0){
 		 iraURL('../administrator/tipoadmin.php');	
@@ -26,7 +26,7 @@ if(isset($_POST["guardar"])){
 		$id=$_GET['id'];
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
-        $resultado=mysql_query($conn,"UPDATE tipoadministrador SET nombre='$nombre', descripcion='$descripcion' where tipoadministradorid=$id") or die(mysql_error($conn));
+        $resultado=mysql_query("UPDATE tipoadministrador SET nombre='$nombre', descripcion='$descripcion' where tipoadministradorid=$id",$conn) or die(mysql_error($conn));
 		if($resultado){
 			llenarLog(2, "tipo de administrador");
 			javaalert("tipo de información fue editado con exito");
