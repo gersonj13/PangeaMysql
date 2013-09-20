@@ -71,11 +71,9 @@ if (isset($_POST["inicio"])) {
                         <dl>
                           <dt><span>Nombre de usuario</span></dt>
                           <dd><input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es Mayúscula(letras, puntos o números)" maxlength="34" pattern="[A-ZÑ]{1}[a-z.ñ0-9]{1,33}" autofocus required></dd>
-<<<<<<< HEAD
-                          <dt>    <span>Contrase&ntilde;a</span></dt>
-=======
+
                           <dt>    <span>Contraseña</span></dt>
->>>>>>> parent of 595d270... cambio charset
+
                          <dd>     <input type="password"  placeholder="Contraseña" name="password" id="password" maxlength="34"  title="Debe agregar la contraseña" required></dd>
                          <dt>         </dt>
                          <dd><button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesión</button>
