@@ -13,8 +13,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 if(isset($_POST["guardar"])){
 		if(isset($_POST["nombre"]) && isset($_POST["usuario"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"]) && $_POST["nombre"]!=""  && $_POST["usuario"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
 		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuario"]."' and usuarioid!=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query($SQL,$conn) or die(mysql_error($conn));
+		$registros=mysql_num_rows($result);
 		if($registros == 0){
 			if($_POST["contrasena"]==$_POST["contrasena_c"]){
 					$id=$_GET['id'];
@@ -23,7 +23,8 @@ if(isset($_POST["guardar"])){
 					$direccion=$_POST['direccion'];
 					$usuario=$_POST['usuario'];
 					$contrasena=$_POST['contrasena'];
-					$resultado=pg_query($conn,"UPDATE usuario SET nombre='$nombre', apellido='$apellido' , direccion='$direccion', usuario='$usuario', contrasena='$contrasena' where usuarioid=$id") or die(pg_last_error($conn));
+					$update="UPDATE usuario SET nombre='$nombre', apellido='$apellido' , direccion='$direccion', usuario='$usuario', contrasena='$contrasena' where usuarioid=$id";
+					$resultado=mysql_query($update,$conn) or die (mysql_error($conn));
 					if($resultado){
 						llenarLog(2, "Usuario");
 						javaalert("El usuario fue modificado con éxito");
@@ -109,12 +110,12 @@ if(isset($_POST["guardar"])){
       <div class="well well-large">
        <?php
         	$cons="SELECT * FROM usuario WHERE usuarioid=".$_GET['id'];
-			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
-			$registros= pg_num_rows($resulta);
+			$resulta = mysql_query($cons,$conn) or die(mysql_error($conn));
+			$registros=mysql_num_rows($resulta);
 						if($registros!=1){
 							iraURL("usuario.php");
 							}
-			$row=pg_fetch_array($resulta);
+			$row = mysql_fetch_array($resulta);
 		?>
      <form method="post">
           <div class="row-fluid">

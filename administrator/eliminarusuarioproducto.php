@@ -13,7 +13,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		
 if(isset($_POST["si"])){
 	   $SQL="DELETE FROM usuarioproducto WHERE usuarioproductoid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$result =mysql_query($SQL,$conn) or die(mysql_error($conn));
 		llenarLog(3, "UsuarioProducto");
 		javaalert("El producto ya no esta asignado al usuario");
 		iraURL("usuarioproducto.php?id=".$_GET['idusuario']);
@@ -93,12 +93,12 @@ iraURL("usuarioproducto.php?id=".$_GET['idusuario']);
     <div class="span9">
         <?php 
 		$SQL="SELECT nombre,descripcion FROM usuarioproducto,producto where usuarioproducto.productoid=producto.productoid and usuarioproductoid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$resulta = mysql_query($SQL,$conn) or die(mysql_error($conn));
+		$registros=mysql_num_rows($resulta);
 		if($registros!=1){
 			iraURL("usuarioproducto.php");
 			}
-		$row = pg_fetch_array ($result);
+		$row = mysql_fetch_array($resulta);
     ?>
     
     <div class="well well-small alert alert-block" align="center">

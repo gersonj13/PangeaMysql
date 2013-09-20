@@ -82,9 +82,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     </div>
     <div class="span9">
     <?php 
-		$SQL="SELECT * FROM tipoinformacion";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+	$SQL="SELECT * FROM tipoinformacion";
+	$result = mysql_query($SQL,$conn) or die(mysql_error());
+	$registros=mysql_num_rows($result);
+	
 	if($registros == 0){
     ?>
     <div class="alert alert-block" align="center">
@@ -125,7 +126,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <?php    
 		for ($i=0;$i<$registros;$i++)
 			{
-			$row = pg_fetch_array ($result,$i );
+			mysql_data_seek($result,$i);	  	
+			$row = mysql_fetch_array($result);	
 			if(strlen ($row[2])>35){
 				$descripcion=substr($row[2],0,35)."...";
 				}else{

@@ -9,9 +9,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	//codigo para guardar y volver a la pagina de tipoinformacion.php
 	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
 		if(isset($_POST["nombre"]) && isset($_POST["descripcion"]) && $_POST["nombre"]!="" && $_POST["descripcion"]!="" ){
-				$insertar = "insert into tipoinformacion values(nextval('tipoinformacion_tipoinformacionid_seq'),'".$_POST['nombre']."','".$_POST['descripcion']."');";
+				$insertar = "insert into tipoinformacion values(default,'".$_POST['nombre']."','".$_POST['descripcion']."');";
 				$conex=conectar();
-				pg_query($conex,$insertar) or die (pg_last_error($conex));
+				mysql_query($insertar,$conex) or die (mysql_error($conex));
 				if(isset($_POST["crear_uno"])){
 					iraURL('../administrator/tipoinfo.php');	
 				}else{

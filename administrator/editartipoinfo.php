@@ -15,7 +15,8 @@ if(isset($_POST["guardar"])){
 		$id=$_GET['id'];
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
-        $resultado=pg_query($conn,"UPDATE tipoinformacion SET nombre='$nombre', descripcion='$descripcion' where tipoinformacionid=$id") or die(pg_last_error($conn));
+        $update="UPDATE tipoinformacion SET nombre='$nombre', descripcion='$descripcion' where tipoinformacionid=$id";
+		$resultado=mysql_query($update,$conn) or die (mysql_error($conn));
 		if($resultado){
 			llenarLog(2, "tipo de información");
 			javaalert("El tipo de información fue modificado con éxito");
@@ -93,12 +94,12 @@ if(isset($_POST["guardar"])){
       <div class="well well-large">
        <?php
         	$cons="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$_GET['id'];
-			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
-				$registros= pg_num_rows($resulta);
+			$resulta = mysql_query($cons,$conn) or die(mysql_error($conn));
+		$registros=mysql_num_rows($resulta);
 						if($registros!=1){
 							iraURL("tipoinfo.php");
 							}
-			$row=pg_fetch_array($resulta);
+			$row = mysql_fetch_array($resulta);
 			
 		?>
      <form method="post">

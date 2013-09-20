@@ -12,13 +12,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 
 	if(isset($_POST["nombre"])  && isset($_POST["usuarioo"]) && isset($_POST["contrasena"]) && isset($_POST["contrasena_c"])  && $_POST["usuarioo"]!="" && $_POST["contrasena"]!="" && $_POST["contrasena_c"]!=""){
 		$SQL="SELECT * FROM usuario where usuario='".$_POST["usuarioo"]."'";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query($SQL,$conn) or die(mysql_error($conn));
+		$registros=mysql_num_rows($result);
 		if($registros == 0){
 				if($_POST["contrasena"]==$_POST["contrasena_c"]){
-						$insertar = "insert into usuario values(nextval('usuario_usuarioid_seq'),'".$_POST['nombre']."','".$_POST['apellido']."','".$_POST['direccion']."','".$_POST['usuarioo']."','".$_POST['contrasena']."',".$_SESSION["id_usuario"].");";
+						$insertar = "insert into usuario values(default,'".$_POST['nombre']."','".$_POST['apellido']."','".$_POST['direccion']."','".$_POST['usuarioo']."','".$_POST['contrasena']."',".$_SESSION["id_usuario"].");";
 						$conex=conectar();
-						pg_query($conex,$insertar) or die (pg_last_error($conex));
+						mysql_query($insertar,$conex) or die (mysql_error($conex));
 						llenarLog(1,"USUARIO");
 						if(isset($_POST["crear_uno"])){
 						iraURL('../administrator/usuario.php');		

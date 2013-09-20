@@ -82,9 +82,8 @@ $id=$_GET['id'];
         
         <?php
         	$cons="SELECT * FROM usuario WHERE usuarioid=$id";
-			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
-			
-			if($row=pg_fetch_array($resulta)){
+			$resulta = mysql_query($cons,$conn) or die(mysql_error($conn));		
+			if($row=mysql_fetch_array($resulta)){
 		?>
         	<div class="span3 well well-small"><b>Id</b></div>
             <div class="span6 well well-small "><?php echo $row['usuarioid'];?></div>

@@ -14,7 +14,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 $id=$_GET['id'];
 if(isset($_POST["guardar"])){
 		$producto=$_POST['producto'];
-		$resultado=pg_query($conn,"UPDATE usuarioproducto SET  productoid='$producto' WHERE usuarioproductoid=$id") or die(pg_last_error($conn));
+		$update="UPDATE usuarioproducto SET  productoid='$producto' WHERE usuarioproductoid=$id";
+		$resultado=mysql_query($update,$conn) or die (mysql_error($conn));
+
 		 if($resultado){
 			javaalert('Se Modifico el producto asignado');
 			llenarLog(2, "usuarioproducto");
@@ -105,18 +107,18 @@ if(isset($_POST["guardar"])){
                   <select id="producto" name="producto">
                         <?php
 						$consu1="SELECT producto.productoid,nombre FROM producto,usuarioproducto where usuarioproducto.productoid=producto.productoid and usuarioproductoid=".$_GET["id"];
-						$resulta3 = pg_query ($conn, $consu1) or die("Error en la consulta SQL");
-						$registros= pg_num_rows($resulta3);
+						$resulta3 = mysql_query($consu1,$conn) or die(mysql_error($conn));
+						$registros=mysql_num_rows($resulta3);
 						if($registros!=1){
 							iraURL("usuario.php");
 							}
-						if($row3=pg_fetch_array($resulta3)){
+						if($row3 = mysql_fetch_array($resulta3)){
 							echo '<option value="'.$row3['productoid'].'">'.$row3['nombre'].'</option>';
                         
                         }
 						$SQL="SELECT producto.productoid,nombre FROM producto where productoid NOT IN (SELECT productoid FROM usuarioproducto where usuarioid=".$_SESSION["usuarioid"].")";
-						$resultpro = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-						while($rowpro=pg_fetch_array($resultpro)){
+						$resultpro = mysql_query($SQL,$conn) or die(mysql_error($conn));
+						while($rowpro=mysql_num_rows($resultpro)){
 							echo '<option value="'.$rowpro['productoid'].'">'.$rowpro['nombre'].'</option>';
 							}
 						?>

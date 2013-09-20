@@ -13,7 +13,8 @@ if(isset($_POST["guardar"])){
 	if($_POST["producto"]>0){
 		$producto=$_POST["producto"];
 		$usuario=$_GET["id"];
-		$resultado=pg_query($conn,"INSERT INTO usuarioproducto values( nextval('usuarioproducto_usuarioproductoid_seq'),$usuario,$producto)") or die(pg_last_error($conn));
+		$insertar="INSERT INTO usuarioproducto values(default,$usuario,$producto)";
+		mysql_query($insertar,$conn) or die (mysql_error($conn));
 		if($resultado){			
 			llenarLog(1, "USUARIOPRODUCTO");	
 		}
@@ -23,8 +24,8 @@ if(isset($_POST["guardar"])){
 }
 // verificando los productos que no estan asociados a este cliente
 $SQL="SELECT * FROM producto where productoid NOT IN (SELECT productoid FROM usuarioproducto where usuarioid=".$_GET['id'].")";
-$resultpro = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-$nro= pg_num_rows($resultpro);
+$resultpro = mysql_query($SQL,$conn) or die(mysql_error());
+$nro=mysql_num_rows($resultpro);
 ?>
 
 <!DOCTYPE html>
@@ -94,10 +95,9 @@ $nro= pg_num_rows($resultpro);
       </div>
     </div>
       <?php 
-		$SQL="SELECT usuarioproductoid,nombre FROM usuarioproducto,producto where usuarioproducto.productoid=producto.productoid and usuarioid=".$_GET["id"];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-	
+		$SQL="SELECT usuarioproductoid,nombre FROM usuarioproducto,producto where usuarioproducto.productoid=producto.productoid and usuarioid=".$_GET["id"];	
+	$result = mysql_query($SQL,$conn) or die(mysql_error());
+	$registros=mysql_num_rows($result);
 	?>
      <div class="span9 well well-large">
   
@@ -128,9 +128,10 @@ $nro= pg_num_rows($resultpro);
       <?php 
 		for ($i=0;$i<$registros;$i++)
 			{
-			$row = pg_fetch_array ($result,$i );
-		    echo '<tr>';
-			echo '<td width="40%">'.$row["nombre"].' </td> </a>';
+					mysql_data_seek($result,$i);
+				  	$row = mysql_fetch_array($result);			   
+		 echo '<tr>';
+		echo '<td width="40%">'.$row["nombre"].' </td> </a>';
 			if($nro==0){
 		echo '<td width="15%"> <a href="editarusuarioproducto.php?id='.$row["usuarioproductoid"].'&idusuario='.$_GET["id"].'"> <button class="btn btn-primary" type="button" name="boton" disabled> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 				}else{
@@ -174,7 +175,7 @@ $nro= pg_num_rows($resultpro);
                               <select id="producto" name="producto">
                                 <option value="0">Seleccione Opción</option>
                                 <?php					
-                                while($rowpro=pg_fetch_array($resultpro)){
+                                while($rowpro = mysql_fetch_array($resultpro)){
                                     echo '<option value="'.$rowpro['productoid'].'">'.$rowpro['nombre'].'</option>';
                                     }
                                 ?>

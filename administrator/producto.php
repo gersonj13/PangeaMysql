@@ -80,12 +80,9 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span9">
     <?php 
 	$SQL="SELECT * FROM producto";
-	
 	$result = mysql_query($SQL,$conn) or die(mysql_error());
 	$registros=mysql_num_rows($result);
-	
-	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-	$registros= pg_num_rows($result);
+
 	if($registros == 0){
     ?>
     <div class="alert alert-block" align="center">

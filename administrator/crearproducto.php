@@ -10,13 +10,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	if(isset($_POST["crear_uno"]) || isset($_POST["crear_otro"])){
 
 	if(isset($_POST["nombre"]) && $_POST["nombre"]!="" && isset($_POST["redactor"]) && $_POST["redactor"]!="" && isset($_POST["enlace"]) && $_POST["enlace"]!="" ){		
-				$insertar = "insert into producto values(nextval('producto_productoid_seq'),'".$_POST['nombre']."','".$_POST['redactor']."','".$_POST['enlace']."','');";
+				$insertar = "insert into producto values(default,'".$_POST['nombre']."','".$_POST['redactor']."','".$_POST['enlace']."','');";
 				$conex=conectar();
 				mysql_query($insertar,$conex) or die (mysql_error($conex));
-				//$sql_select="SELECT last_value FROM producto_productoid_seq;";				
+			/*	$sql_select="SELECT last_value FROM producto_productoid_seq;";				
 				$results = mysql_query($sql_select,$conn) or die(mysql_error());
 				mysql_data_seek($results,0);
-				$arreglo = mysql_fetch_array($results);
+				$arreglo = mysql_fetch_array($results);*/
 				if($_FILES['imagen']['name']!=""){
 					
 					$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
@@ -41,9 +41,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					if($error==UPLOAD_ERR_OK){ 
 							
 							//Nueva función
-			   				move_uploaded_file($imagen,$uploadfile);		
-							$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=".$arreglo[0]."";
-							$result= pg_query($conn, $sql_update);
+			   				move_uploaded_file($imagen,$uploadfile);	
+							$rs = mysql_query("SELECT MAX(productoid) AS id FROM producto");
+								if ($row = mysql_fetch_row($rs)) {
+								$id = trim($row[0]);	
+								}
+							$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=$id";
+							$result=mysql_query($sql_update,$conn) or die (mysql_error($conn));
+
 																																
 						}		
 					 }

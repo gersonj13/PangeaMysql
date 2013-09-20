@@ -95,29 +95,16 @@ if(isset($_POST["no"])){
    
         <?php 
 		
-		   $cons="SELECT * FROM producto WHERE productoid=".$_GET['id'];
-		$resulta = mysql_query($cons,$conex) or die(mysql_error($conex));
+		$cons="SELECT * FROM producto WHERE productoid=".$_GET['id'];
+		$resulta = mysql_query($cons,$conn) or die(mysql_error($conn));
 		$registros=mysql_num_rows($resulta);
-		
 						if($registros!=1){
 							iraURL("producto.php");
 							}
 					$row = mysql_fetch_array($resulta);
-					
-					
-		
-		 $SQL="SELECT * FROM producto WHERE productoid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-		$row = pg_fetch_array ($result);
-		$registros= pg_num_rows($result);
-		if($registros!=1){
-			iraURL("poducto.php");
-			}
-		
 		$SQL2="SELECT * FROM usuarioproducto  WHERE productoid=".$_GET['id'];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$registros2= pg_num_rows($result2);
+		$result2 = mysql_query($SQL2,$conn) or die(mysql_error($conn));
+		$registros2=mysql_num_rows($result2);
 		
 		if($registros2!=0){
 		 

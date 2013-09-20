@@ -11,7 +11,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	}
 if(isset($_POST["si"])){
 	   $SQL="DELETE FROM usuario WHERE usuarioid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$result =mysql_query($SQL,$conn) or die(mysql_error($conn));
 		llenarLog(3, "Usuario");
 		javaalert("El usuario fue eliminado");
 		iraURL("usuario.php");
@@ -92,17 +92,18 @@ if(isset($_POST["no"])){
    
         <?php 
 		
-		 $SQL="SELECT * FROM usuario WHERE usuarioid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-		$row = pg_fetch_array ($result);
+		$SQL="SELECT * FROM usuario WHERE usuarioid=".$_GET['id'];
+		$resulta = mysql_query($SQL,$conn) or die(mysql_error($conn));
+		$registros=mysql_num_rows($resulta);
+		$row = mysql_fetch_array($resulta);
 		if($registros!=1){
 			iraURL("usuario.php");
 			}
 		
 		$SQL2="SELECT * FROM usuarioproducto  WHERE usuarioid=".$_GET['id'];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$registros2= pg_num_rows($result2);
+		$result2 = mysql_query($SQL2,$conn) or die(mysql_error($conn));
+		$registros2=mysql_num_rows($result2);
+		
 		if($registros2>0){
 		 
 			?>   
