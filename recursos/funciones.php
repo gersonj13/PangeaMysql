@@ -186,7 +186,6 @@ function llenarLog($accion,$descripcion){
 			$accion="VACIO DE BITACORA";
 			break;	
 		}
-		echo "INSERT INTO bitacora values(default,'".$accion."',current_date,current_time,CURTIME(),".$_SESSION["id_usuario"].",'".$descripcion."')"; 
 mysql_query("INSERT INTO bitacora values(default,'".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')",$conex) or die("Error Bitacora");
 
 }
