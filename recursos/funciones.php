@@ -148,7 +148,7 @@ function javaalert($msj){
 function supera($tipoad){
 	$conn = Conectar();
 	$SQL9="SELECT * FROM administrador WHERE tipoadministradorid=".$tipoad;
-		$result9 = mysql_query ( $SQL9,$conn) or die("Error en la consulta SQL");
+		$result9 = mysql_query ($SQL9,$conn) or die("Error en la consulta SQL");
 		$row9 = mysql_fetch_array ($result9);
 		$reg=mysql_num_rows($result9);
 		      if($reg= mysql_num_rows($result9)){
@@ -187,7 +187,7 @@ function llenarLog($accion,$descripcion){
 			break;	
 		}
 		
-mysql_query("INSERT INTO bitacora values(nextval('bitacora_bitacoraid_seq'),'".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')",$conex) or die("Error Bitacora");
+mysql_query("INSERT INTO bitacora values('','".$accion."',current_date,current_time,".$_SESSION["id_usuario"].",'".$descripcion."')",$conex) or die("Error Bitacora");
 
 }
 //Traer Menu principal
