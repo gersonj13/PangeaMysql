@@ -86,9 +86,9 @@ $id=$_GET['id'];
         
         <?php
         	$cons="SELECT * FROM informacion WHERE informacionid=$id";
-			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
+			$resulta = mysql_query ($conn, $cons) or die("Error en la consulta SQL");
 			
-			if($row=pg_fetch_array($resulta)){
+			if($row=mysql_fetch_array($resulta)){
 		?>
         
 			<div class="span3 well well-small"><b>Id</b></div>
@@ -109,8 +109,8 @@ $id=$_GET['id'];
             	
                  <?php 
 				$cons1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
-				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-				if($row1=pg_fetch_array($resulta2)){
+				$resulta2=mysql_query ($conn, $cons1) or die("Error en la consulta SQL");
+				if($row1=mysql_fetch_array($resulta2)){
 				?>
             	<div class="span3 well well-small"><b>Tipo de Información</b></div>
             	<div class="span6 well well-small"><?php echo $row1['nombre'];?></div>
@@ -118,8 +118,8 @@ $id=$_GET['id'];
                 
             	<?php 
 				$cons1="SELECT * FROM administrador WHERE administradorid=".$_SESSION["id_usuario"];
-				$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-				if($row1=pg_fetch_array($resulta2)){
+				$resulta2=mysql_query ($conn, $cons1) or die("Error en la consulta SQL");
+				if($row1=mysql_fetch_array($resulta2)){
 				?>
             	<div class="span3 well well-small"><b>Administrador</b></div>
             	<div class="span6 well well-small"><?php echo $row1['nombre'].' '.$row1['apellido'];?></div>

@@ -18,9 +18,9 @@ $id=$_GET['id'];
 if(isset($_POST["guardar"])){
 	
 	$cons="SELECT * FROM administrador WHERE administradorid=$id";
-	$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
+	$resulta = mysql_query ($conn, $cons) or die("Error en la consulta SQL");
 			
-	if($row=pg_fetch_array($resulta)){
+	if($row=mysql_fetch_array($resulta)){
 		$id=$row['administradorid'];
 	}
 	
@@ -34,13 +34,13 @@ if(isset($_POST["guardar"])){
 		$tipoadmin=$_POST['tipoadmin'];
 		
 		$SQL="SELECT * FROM administrador where usuario='$usuario' and administradorid!=$id";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 	
 		if($registros == 0){
 	
 			if($_POST["contrasena"]==$_POST["contrasena_c"]){
-				$resultado=pg_query($conn,"UPDATE administrador SET nombre='$nombre', apellido='$apellido', usuario='$usuario', contrasena='$contrasena', tipoadministradorid='$tipoadmin' WHERE administradorid=$id") or die(pg_last_error($conn));
+				$resultado=mysql_query($conn,"UPDATE administrador SET nombre='$nombre', apellido='$apellido', usuario='$usuario', contrasena='$contrasena', tipoadministradorid='$tipoadmin' WHERE administradorid=$id") or die(mysql_error($conn));
 	
 				if($resultado){
 					javaalert('Se Modifico el Administrador');
@@ -129,9 +129,9 @@ if(isset($_POST["guardar"])){
         
         <?php
         	$cons="SELECT * FROM administrador WHERE administradorid=$id";
-			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
+			$resulta = mysql_query ($conn, $cons) or die("Error en la consulta SQL");
 			
-			if($row=pg_fetch_array($resulta)){
+			if($row=mysql_fetch_array($resulta)){
 		?>
         
 	
@@ -187,16 +187,16 @@ if(isset($_POST["guardar"])){
                     	<?php 
 						
 						$consu="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$row['tipoadministradorid'];
-						$resulta1 = pg_query ($conn, $consu) or die("Error en la consulta SQL");
-						if($row1=pg_fetch_array($resulta1)){
+						$resulta1 = mysql_query ($conn, $consu) or die("Error en la consulta SQL");
+						if($row1=mysql_fetch_array($resulta1)){
 							echo '<option value="'.$row1['tipoadministradorid'].'">'.$row1['nombre'].'</option>';
                         
                         }
 								
 						$SQL="SELECT * FROM tipoadministrador WHERE tipoadministradorid!=".$row['tipoadministradorid'];
-						$resulta2 = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$resulta2 = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
 						
-						while($row2=pg_fetch_array($resulta2)){
+						while($row2=mysql_fetch_array($resulta2)){
 							echo '<option value="'.$row2['tipoadministradorid'].'">'.$row2['nombre'].'</option>';
 
 							}

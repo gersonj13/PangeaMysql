@@ -15,7 +15,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	
 if(isset($_POST["si"])){
 	$SQL="DELETE FROM administrador WHERE administradorid=".$_GET['id'];
-	$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+	$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
 	javaalert("El Administrador fue Eliminado");
 	llenarLog(3, "Administrador");
 	iraURL('../administrator/admin.php');
@@ -98,9 +98,9 @@ if(isset($_POST["no"])){
       <?php 
 		
 		$SQL="SELECT * FROM administrador WHERE administradorid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-		$row = pg_fetch_array ($result);
+		$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
+		$row = mysql_fetch_array ($result);
 		
 		if($row==0){
 			iraURL('admin.php');
@@ -108,20 +108,20 @@ if(isset($_POST["no"])){
 
 		
 		$SQL2="SELECT * FROM administrador WHERE creadorid=".$_GET['id'];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$registros2= pg_num_rows($result2);
+		$result2 = mysql_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
+		$registros2= mysql_num_rows($result2);
 		
 		$SQL3="SELECT * FROM informacion WHERE administradorid=".$_GET['id'];
-		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
-		$registros3= pg_num_rows($result3);
+		$result3 = mysql_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
+		$registros3= mysql_num_rows($result3);
 		
 		$SQL4="SELECT * FROM usuario WHERE administradorid=".$_GET['id'];
-		$result4 = pg_query ($conn, $SQL4 ) or die("Error en la consulta SQL");
-		$registros4= pg_num_rows($result4);
+		$result4 = mysql_query ($conn, $SQL4 ) or die("Error en la consulta SQL");
+		$registros4= mysql_num_rows($result4);
 		
 		$SQL5="SELECT * FROM bitacora WHERE administradorid=".$_GET['id'];
-		$result5 = pg_query ($conn, $SQL5 ) or die("Error en la consulta SQL");
-		$registros5= pg_num_rows($result5);
+		$result5 = mysql_query ($conn, $SQL5 ) or die("Error en la consulta SQL");
+		$registros5= mysql_num_rows($result5);
 		
 		if($registros2!=0 || $registros3!=0 || $registros4!=0 || $registros5!=0){
 		 ?>  

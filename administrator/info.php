@@ -86,16 +86,16 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		   $SQL=$SQL." where tipoinformacionid=".$_GET['t'];	
 			
 		}
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 		$cons1="SELECT * FROM tipoinformacion order by nombre asc";
-	    $resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
+	    $resulta2=mysql_query ($conn, $cons1) or die("Error en la consulta SQL");
 		?>
          <div class="well well-small">
     <ul class="breadcrumb">
     <li><a href="info.php">Todos</a> <span class="divider">/</span></li>
     <?php for($i=0;$i<pg_num_rows($resulta2);$i++) {
-		$tip=pg_fetch_array($resulta2,$i);
+		$tip=mysql_fetch_array($resulta2,$i);
 		?>
   <li><a href="info.php?t=<?php echo $tip[0]; ?>"><?php echo $tip[1]; ?></a> <span class="divider">/</span></li>
    <?php }?>
@@ -160,8 +160,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			}
 			
 			$cons1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
-			$resulta2=pg_query ($conn, $cons1) or die("Error en la consulta SQL");
-			if($row1=pg_fetch_array($resulta2)){
+			$resulta2=mysql_query ($conn, $cons1) or die("Error en la consulta SQL");
+			if($row1=mysql_fetch_array($resulta2)){
 				echo '<td width="14%">'.$row1["nombre"].'</td>';
 			}
 			echo '<td width="14%"> <a href="editarinfo.php?id='.$row["informacionid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';

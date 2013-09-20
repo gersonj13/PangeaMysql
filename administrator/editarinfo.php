@@ -24,7 +24,7 @@ if(isset($_POST["guardar"])){
 		$enlace=$_POST['enlace'];
 		$tipoinfo=$_POST['tipoinfo'];
 	
-		$resultado=pg_query($conn,"UPDATE informacion SET titulo='$titulo', descripcion='$descripcion', enlace='$enlace', tipoinformacionid='$tipoinfo' WHERE informacionid=$id") or die(pg_last_error($conn));
+		$resultado=mysql_query($conn,"UPDATE informacion SET titulo='$titulo', descripcion='$descripcion', enlace='$enlace', tipoinformacionid='$tipoinfo' WHERE informacionid=$id") or die(mysql_error($conn));
 	
 		if($_FILES['imagen']['name']!=""){
 		
@@ -51,7 +51,7 @@ if(isset($_POST["guardar"])){
 				//Nueva función
 			   	move_uploaded_file($imagen,$uploadfile);			
 				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=$id";
-				$result= pg_query($conn, $sql_update);																									
+				$result= mysql_query($conn, $sql_update);																									
 			}	
 		 }
 		 
@@ -138,9 +138,9 @@ if(isset($_POST["guardar"])){
         
         <?php
         	$cons="SELECT * FROM informacion WHERE informacionid=$id";
-			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
+			$resulta = mysql_query ($conn, $cons) or die("Error en la consulta SQL");
 			
-			if($row=pg_fetch_array($resulta)){
+			if($row=mysql_fetch_array($resulta)){
 		?>
 	
       <form enctype="multipart/form-data" method="post">
@@ -197,16 +197,16 @@ if(isset($_POST["guardar"])){
                     <?php 
 						
 						$consu1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
-						$resulta3 = pg_query ($conn, $consu1) or die("Error en la consulta SQL");
-						if($row3=pg_fetch_array($resulta3)){
+						$resulta3 = mysql_query ($conn, $consu1) or die("Error en la consulta SQL");
+						if($row3=mysql_fetch_array($resulta3)){
 							echo '<option value="'.$row3['tipoinformacionid'].'">'.$row3['nombre'].'</option>';
                         
                         }
 		
 						$SQL="SELECT * FROM tipoinformacion WHERE tipoinformacionid!=".$row['tipoinformacionid'];
-						$resulta4= pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$resulta4= mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
 						
-						while($row4=pg_fetch_array($resulta4)){
+						while($row4=mysql_fetch_array($resulta4)){
 							echo '<option value="'.$row4['tipoinformacionid'].'">'.$row4['nombre'].'</option>';
 
 							}

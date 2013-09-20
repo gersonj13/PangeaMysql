@@ -18,11 +18,11 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		$enlace=$_POST['enlace'];
 		$tipoinfo=$_POST['tipoinfo'];
 		
-		$resultado=pg_query($conn,"INSERT INTO informacion values( nextval('informacion_informacionid_seq'),'$titulo','$descripcion','$enlace','','$tipoinfo',".$_SESSION["id_usuario"].")") or die(pg_last_error($conn));
+		$resultado=mysql_query($conn,"INSERT INTO informacion values( nextval('informacion_informacionid_seq'),'$titulo','$descripcion','$enlace','','$tipoinfo',".$_SESSION["id_usuario"].")") or die(pg_last_error($conn));
 	
 		$sql_select="SELECT last_value FROM informacion_informacionid_seq;";
-		$results=pg_query($conn, $sql_select);
-		$arreglo=pg_fetch_array($results,0);
+		$results=mysql_query($conn, $sql_select);
+		$arreglo=mysql_fetch_array($results,0);
 	
 		if($_FILES['imagen']['name']!=""){
 		
@@ -49,7 +49,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 				//Nueva función
 			   	move_uploaded_file($imagen,$uploadfile);			
 				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=".$arreglo[0]."";
-				$result= pg_query($conn, $sql_update);																									
+				$result= mysql_query($conn, $sql_update);																									
 			}		
 		 }
 	
@@ -161,9 +161,9 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
                         <?php
 		
 						$SQL="SELECT * FROM tipoinformacion";
-						$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
 						
-						while($row=pg_fetch_array($result)){
+						while($row=mysql_fetch_array($result)){
 							echo '<option value="'.$row['tipoinformacionid'].'">'.$row['nombre'].'</option>';
 
 							}

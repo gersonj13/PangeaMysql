@@ -20,13 +20,13 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		$tipoadmin=$_POST['tipoadmin'];
 
 		$SQL="SELECT * FROM administrador where usuario='$usuario'";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 	
 		if($registros == 0){
 
 			if($_POST["contrasena"]==$_POST["contrasena_c"]){
-				$resultado=pg_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')") or die(pg_last_error($conn));
+				$resultado=mysql_query($conn,"INSERT INTO administrador values( nextval('administrador_administradorid_seq'),'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')") or die(mysql_error($conn));
 	
 				if($resultado){
 					javaalert('Se Creo un Administrador');
@@ -133,9 +133,9 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
                         <?php
 		
 						$SQL="SELECT * FROM tipoadministrador";
-						$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
 						
-						while($row=pg_fetch_array($result)){
+						while($row=mysql_fetch_array($result)){
 							echo '<option value="'.$row['tipoadministradorid'].'">'.$row['nombre'].'</option>';
 
 							}

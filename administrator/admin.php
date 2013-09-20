@@ -72,10 +72,10 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <?php
 		$ban=false;
 		$SQL9="SELECT * FROM administrador WHERE tipoadministradorid=".$_SESSION["admin"];
-		$result9 = pg_query ($conn, $SQL9) or die("Error en la consulta SQL");
-		$row9 = pg_fetch_array ($result9);
-		$reg= pg_num_rows($result9);
-		if($reg= pg_num_rows($result9)){
+		$result9 = mysql_query ($conn, $SQL9) or die("Error en la consulta SQL");
+		$row9 = mysql_fetch_array ($result9);
+		$reg= mysql_num_rows($result9);
+		if($reg= mysql_num_rows($result9)){
 			if($row9['tipoadministradorid']==1){
 				$ban=true;
 			}
@@ -99,8 +99,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <?php
 		
 		$SQL="SELECT * FROM administrador";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query($conn, $SQL ) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 
      	if($registros == 0){
     	?>
@@ -147,7 +147,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <?php    
 		for ($i=0;$i<$registros;$i++){
 
-			$row = pg_fetch_array ($result,$i);
+			$row = mysql_fetch_array ($result,$i);
 			
 			echo '<tr>';
 			echo '<td width="10%">'.$row["administradorid"].'</td>';
