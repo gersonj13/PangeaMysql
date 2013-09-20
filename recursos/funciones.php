@@ -49,7 +49,7 @@ function validarlogin(){
 		$usu = $_SESSION["usuarioadmin"];
 		$pass = $_SESSION["passwordadmin"];
 		$query="SELECT * FROM administrador WHERE usuario='$usu' AND contrasena='$pass'";
-		$Qlogin = mysql_query($conex,$query) or die("Error con Mysql");
+		$Qlogin = mysql_query($query,$conex) or die("Error con Mysql");
 		$fila = mysql_fetch_array($Qlogin);
 		
 		if(mysql_num_rows($Qlogin) == 0){
