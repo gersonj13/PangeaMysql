@@ -22,13 +22,11 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
 
 <?php		
-	   $SQL="DELETE FROM bitacora";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		llenarLog(3, "se vacio la bitacora");
-		javaalert("la bitacora fue vaciada");
+	   	$SQL="DELETE FROM bitacora";
+		$result = mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
+		llenarLog(3, "Se Vacio la Bitácora");
+		javaalert("La Bitácora fue Vaciada");
 		iraURL('bitacora.php');
-		
-	
 
 ?>
 

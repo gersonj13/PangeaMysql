@@ -67,45 +67,34 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <!-- /container -->
 <div class="container">
    <div class="row-fluid">
-
     <div class="span3">
       <div style="text-align:center">
-        
             <ul class="nav  nav-pills nav-stacked">
-
-			  
               <li class="active"> <a href="eliminarbitacora.php">  <span class="add-on"><i class="icon-trash"></i> </span> Vaciar Bitácora  </a> </li>
-              
               <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
-
             </ul>
       </div>
     </div>
     <div class="span9">
     
       <?php 
-		
 		$SQL="SELECT * FROM bitacora order by bitacoraid desc";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 		
 	if($registros == 0){
     ?>
     <div class="well alert alert-block">
     <h2 class="alert alert-block">Atención</h2>
-    <h4>No existen registros en bitacora</h4>
+    <h4>No Existen Registros en Bitácora</h4>
     </div>
      <?php 
 	}else{
 	
 	?>
-    
       <div class="well well-large">
-    
-      
         <p>
         <?php
-		
 
 	//mostrar resultados
 	?>
@@ -134,14 +123,13 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				</tr>
 			  </thead>
 				<tbody>
-    <form action="editartipoadmin.php" method="get"> 
+    <form method="get"> 
    
       <?php   
 	  
-		for ($i=0;$i<$registros;$i++)
-			{
+		for ($i=0;$i<$registros;$i++){
 
-			$row = pg_fetch_array ($result,$i );
+			$row = mysql_fetch_array ($result);
 			
 			echo '<tr>';
 			echo '<td width="10%" align="center">'.$row["bitacoraid"].'</td>';
@@ -149,48 +137,31 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="20%" align="center">'.$row["descripcion"].'</td>';
 			echo '<td width="20%" align="center">'.$row["fecha"].'</td>';
 			echo '<td width="20%" align="center">'.$row["hora"].'</td>';
+			
 			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
-		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
-		$row3 = pg_fetch_array ($result3);
+			$result3 = mysql_query ($SQL3, $conn) or die("Error en la consulta SQL");
+			$row3 = mysql_fetch_array ($result3);
 		
 			echo '<td width="20%" align="center">'.$row3["nombre"].'</td>';
 		    echo '</tr>';
             
-			}
-			
-  
+			}  
 		?>
       
-    
 	 </form> 	
-</tbody>	  
+	</tbody>	  
     </table>
     <?php
     }
 	?>
 
     <ul id="pagination" class="footable-nav"><span>Pages:</span></ul>
-
-		
-        
         
          </p>
       </div>
     </div>
     </div>
-  
 </div>
-<?php		
-if(isset($_POST["borrar"])){
-	   $SQL="DELETE FROM bitacora";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		llenarLog(3, "menu");
-		javaalert("El menu fue eliminado");
-		iraURL("menu.php");
-		
-	
-}
-?>
 
 <!-- Le javascript
 ================================================== --> 
@@ -209,11 +180,7 @@ $('.dropdown-toggle').click(function(e) {
   }, this), 0);
 });
  
- 
 });
-
-
-
 </script>  
 
  <script src="../recursos/footable/js/footable.js" type="text/javascript"></script>
