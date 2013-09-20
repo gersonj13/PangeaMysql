@@ -85,8 +85,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <?php 
 		
 		$SQL="SELECT * FROM sucursal";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ($conn,$SQL) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 		
 	if($registros == 0){
     ?>
@@ -141,7 +141,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		for ($i=0;$i<$registros;$i++)
 			{
 
-			$row = pg_fetch_array ($result,$i );
+			$row = mysql_fetch_array ($result,$i );
 			
 			echo '<tr>';
 			echo '<td width="10%">'.$row["sucursalid"].'</td>';

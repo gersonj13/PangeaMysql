@@ -13,8 +13,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
   }else {
 	  
 	  $SQLi="SELECT * FROM sucursal WHERE sucursalid=".$_GET['id'];
-		$resulti = pg_query ($conn, $SQLi ) or die("Error en la consulta SQL");
-		$registrosi= pg_num_rows($resulti);
+		$resulti = mysql_query ($SQLi,$conn ) or die("Error en la consulta SQL");
+		$registrosi= mysql_num_rows($resulti);
 		if($registrosi==0){
 		  iraURL('../administrator/sucursal.php');	
 		}
@@ -95,9 +95,9 @@ $id=$_GET['id'];
         
         <?php
         	$cons="SELECT * FROM sucursal WHERE sucursalid=$id";
-			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
+			$resulta = mysql_query ($cons, $conn) or die("Error en la consulta SQL");
 			
-			if($row=pg_fetch_array($resulta)){
+			if($row=mysql_fetch_array($resulta)){
 		?>
         
 			<div class="span3 well well-small"><b>Id</b></div>

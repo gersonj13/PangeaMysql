@@ -11,8 +11,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
   }else {
 	  
 	  $SQLi="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
-		$resulti = pg_query ($conn, $SQLi ) or die("Error en la consulta SQL");
-		$registrosi= pg_num_rows($resulti);
+		$resulti = mysql_query ($conn, $SQLi ) or die("Error en la consulta SQL");
+		$registrosi= mysql_num_rows($resulti);
 		if($registrosi==0){
 		 iraURL('../administrator/tipoadmin.php');	
 		}
@@ -26,7 +26,7 @@ if(isset($_POST["guardar"])){
 		$id=$_GET['id'];
 		$nombre=$_POST['nombre'];
 		$descripcion=$_POST['descripcion'];
-        $resultado=pg_query($conn,"UPDATE tipoadministrador SET nombre='$nombre', descripcion='$descripcion' where tipoadministradorid=$id") or die(pg_last_error($conn));
+        $resultado=mysql_query($conn,"UPDATE tipoadministrador SET nombre='$nombre', descripcion='$descripcion' where tipoadministradorid=$id") or die(mysql_error($conn));
 		if($resultado){
 			llenarLog(2, "tipo de administrador");
 			javaalert("tipo de información fue editado con exito");
@@ -108,9 +108,9 @@ iraURL("tipoadmin.php");
         <p>
           <?php
 	   $SQL="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-		$row = pg_fetch_array ($result);
+		$result = mysql_query ($SQL,$conn ) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
+		$row = mysql_fetch_array ($result);
 	   ?>
         <form method="post">
           <div class="row-fluid">

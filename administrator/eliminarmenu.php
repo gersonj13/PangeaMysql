@@ -11,8 +11,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
   }else {
 	  
 	  $SQLi="SELECT * FROM menu WHERE menuid=".$_GET['id'];
-		$resulti = pg_query ($conn, $SQLi ) or die("Error en la consulta SQL");
-		$registrosi= pg_num_rows($resulti);
+		$resulti = mysql_query ( $SQLi,$conn ) or die("Error en la consulta SQL");
+		$registrosi= mysql_num_rows($resulti);
 		if($registrosi==0){
 		  iraURL('../administrator/menu.php');	
 		}
@@ -96,14 +96,14 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <?php 
 		
 		 $SQL="SELECT * FROM menu WHERE menuid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
-		$row = pg_fetch_array ($result);
+		$result = mysql_query ( $SQL ,$conn) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
+		$row = mysql_fetch_array ($result);
 		
 		
 		$SQL2="SELECT * FROM menu WHERE submenu=".$_GET['id'];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$registros2= pg_num_rows($result2);
+		$result2 = mysql_query ( $SQL2,$conn ) or die("Error en la consulta SQL");
+		$registros2= mysql_num_rows($result2);
 		
 	
 		
@@ -176,7 +176,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		
 if(isset($_POST["si"])){
 	   $SQL="DELETE FROM menu WHERE menuid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$result = mysql_query ( $SQL,$conn ) or die("Error en la consulta SQL");
 		llenarLog(3, "menu");
 		javaalert("El menu fue eliminado");
 		iraURL("menu.php");

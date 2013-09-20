@@ -12,8 +12,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
   }else {
 	  
 	  $SQLi="SELECT * FROM sucursal WHERE sucursalid=".$_GET['id'];
-		$resulti = pg_query ($conn, $SQLi ) or die("Error en la consulta SQL");
-		$registrosi= pg_num_rows($resulti);
+		$resulti = mysql_query ( $SQLi,$conn ) or die("Error en la consulta SQL");
+		$registrosi= mysql_num_rows($resulti);
 		if($registrosi==0){
 		  iraURL('../administrator/sucursal.php');	
 		}
@@ -35,7 +35,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	
 
 	
-	$resultado=pg_query($conn,"UPDATE sucursal SET  nombre='$nombres',direccion='$direccion',telefono='$telefono',correo='$correo',latitud='$latitud',longitud='$longitud',descripcion='$descripcion' where sucursalid=$id") or die(pg_last_error($conn));
+	$resultado=mysql_query($conn,"UPDATE sucursal SET  nombre='$nombres',direccion='$direccion',telefono='$telefono',correo='$correo',latitud='$latitud',longitud='$longitud',descripcion='$descripcion' where sucursalid=$id") or die(mysql_error($conn));
 	$arreglo=$id;
 	
 	if($_FILES['imagen']['name']!=""){
@@ -62,7 +62,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			//Nueva función
 			move_uploaded_file($imagen,$uploadfile);			
 			$sql_update="update sucursal set imagen='".$uploadfile2."' WHERE sucursalid=".$arreglo."";
-			$result= pg_query($conn, $sql_update);
+			$result= mysql_query($sql_update,$conn);
 																													
 			}		
 		 }
@@ -150,8 +150,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         
         <?php
         	$cons="SELECT * FROM sucursal WHERE sucursalid=$id";
-			$resulta = pg_query ($conn, $cons) or die("Error en la consulta SQL");
-			if($row=pg_fetch_array($resulta)){
+			$resulta = mysql_query ( $cons,$conn) or die("Error en la consulta SQL");
+			if($row=mysql_fetch_array($resulta)){
 		?>
 
             <div class="span3 well well-small"><b>Nombre</b></div>

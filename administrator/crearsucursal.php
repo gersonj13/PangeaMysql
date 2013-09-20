@@ -21,11 +21,11 @@ if(isset($_POST["guardar"])){
 	
 
 	
-	$resultado=pg_query($conn,"INSERT INTO sucursal values( nextval('sucursal_sucursalid_seq'),'$nombre','$direccion','$telefono','$correo','','$latitud','$longitud','$descripcion')") or die(pg_last_error($conn));
+	$resultado=mysql_query($conn,"INSERT INTO sucursal values( nextval('sucursal_sucursalid_seq'),'$nombre','$direccion','$telefono','$correo','','$latitud','$longitud','$descripcion')") or die(mysql_error($conn));
 	
 	$sql_select="SELECT last_value FROM sucursal_sucursalid_seq;";
-	$results=pg_query($conn, $sql_select);
-	$arreglo=pg_fetch_array($results,0);
+	$results=mysql_query($conn, $sql_select);
+	$arreglo=mysql_fetch_array($results,0);
 	
 	if($_FILES['imagen']['name']!=""){
 		
@@ -51,7 +51,7 @@ if(isset($_POST["guardar"])){
 			//Nueva función
 			move_uploaded_file($imagen,$uploadfile);		
 			$sql_update="update sucursal set imagen='".$uploadfile2."' WHERE sucursalid=".$arreglo[0]."";
-			$result= pg_query($conn, $sql_update);
+			$result= mysql_query( $sql_update,$conn);
 																													
 			}		
 		 }
@@ -78,11 +78,11 @@ if(isset($_POST["guardar2"])){
 	$longitud=$_POST['longitud'];
 
 	
-	$resultado=pg_query($conn,"INSERT INTO sucursal values( nextval('sucursal_sucursalid_seq'),'$nombre','$direccion','$telefono','$correo','','$latitud','$longitud','$descripcion')") or die(pg_last_error($conn));
+	$resultado=mysql_query($conn,"INSERT INTO sucursal values( nextval('sucursal_sucursalid_seq'),'$nombre','$direccion','$telefono','$correo','','$latitud','$longitud','$descripcion')") or die(mysql_error($conn));
 	
 	$sql_select="SELECT last_value FROM sucursal_sucursalid_seq;";
-	$results=pg_query($conn, $sql_select);
-	$arreglo=pg_fetch_array($results,0);
+	$results=mysql_query($conn, $sql_select);
+	$arreglo=mysql_fetch_array($results,0);
 	
 	if($_FILES['imagen']['name']!=""){
 		
@@ -109,7 +109,7 @@ if(isset($_POST["guardar2"])){
 			//Nueva función
 			move_uploaded_file($imagen,$uploadfile);		
 			$sql_update="update sucursal set imagen='".$uploadfile2."' WHERE sucursalid=".$arreglo[0]."";
-			$result= pg_query($conn, $sql_update);
+			$result= mysql_query( $conn,$sql_update);
 																													
 			}		
 		 }

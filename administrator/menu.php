@@ -11,7 +11,7 @@ if(isset($_GET['s']))
 {
 	
 	$SQL="update menu set orden=(orden-1) where menuid=".$_GET['s']."";
-    $result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+    $result = mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
 	
 	
 }
@@ -19,7 +19,7 @@ if(isset($_GET['b']))
 {
 	
 	$SQL="update menu set orden=(orden+1) where menuid=".$_GET['b']."";
-    $result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
+    $result = mysql_query ($SQL,$conn) or die("Error en la consulta SQL");
 	
 	
 }	
@@ -95,8 +95,8 @@ if(isset($_GET['b']))
       <?php 
 		
 		$SQL="SELECT * FROM menu order by orden asc,nombre asc";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ($SQL,$conn) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 		
 	if($registros == 0){
     ?>

@@ -20,7 +20,7 @@ if(isset($_POST["guardar"])){
 		$admin=$_SESSION["id_usuario"];
 		$enla=$_POST['enlace'];
 		
-	$resultado=pg_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enla')") or die(pg_last_error($conn));
+	$resultado=mysql_query($conn,"INSERT INTO menu values( nextval('menu_menuid_seq'),'$nombre','$submenu','$admin','$enla')") or die(mysql_error($conn));
 	
 	if($resultado){
 			
@@ -109,13 +109,13 @@ if(isset($_POST["guardar"])){
       <?php 
 		
 		$SQL="SELECT * FROM menu";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ( $SQL, $conn) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 		$aux=0;
 		  
 		for ($i=0;$i<$registros;$i++)
 			{
-			$row = pg_fetch_array ($result,$i );
+			$row = mysql_fetch_array ($result,$i );
 			
 			if($row["submenu"]==$_GET['id']){
 				$aux=$aux+1;
@@ -167,13 +167,13 @@ if(isset($_POST["guardar"])){
    
       <?php 
 	  $SQL="SELECT * FROM menu";
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);  
-	  $registros= pg_num_rows($result);
+		$result = mysql_query ( $SQL, $conn) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);  
+	  $registros= mysql_num_rows($result);
 		for ($i=0;$i<$registros;$i++)
 			{
 
-			$row = pg_fetch_array ($result,$i );
+			$row = mysql_fetch_array ($result,$i );
 			
 			
 			
@@ -183,14 +183,14 @@ if(isset($_POST["guardar"])){
 			
 	      echo '<td width="16%">'.$row["nombre"].' </td> </a>';
 		   $SQL7="SELECT * FROM menu WHERE menuid=".$_GET["id"];
-		$result7 = pg_query ($conn, $SQL7 ) or die("Error en la consulta SQL");
-		$row7 = pg_fetch_array ($result7);
+		$result7 = mysql_query ($conn, $SQL7 ) or die("Error en la consulta SQL");
+		$row7 = mysql_fetch_array ($result7);
 		   echo '<td width="16%">'.$row7["nombre"].' </td> </a>';
 		 
 		  		 
 			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
-		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
-		$row3 = pg_fetch_array ($result3);
+		$result3 = mysql_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
+		$row3 = mysql_fetch_array ($result3);
 		echo '<td width="30">'.$row3["nombre"].' </td>';
 		echo '<td width="30">'.$row["enlace"].' </td>';	 
 			echo '<td width="15%"> <a href="editarmenu.php?id='.$row["menuid"].'&boton=editar"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
@@ -235,8 +235,8 @@ if(isset($_POST["guardar"])){
            
            
 			<?php $SQL2="SELECT * FROM menu WHERE menuid=".$_GET["id"];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$row2 = pg_fetch_array ($result2); ?>
+		$result2 = mysql_query ($SQL2,$conn ) or die("Error en la consulta SQL");
+		$row2 = mysql_fetch_array ($result2); ?>
         
              <dt>
                 <div class=" well well-small"><b>Submenu</b></div>
@@ -247,8 +247,8 @@ if(isset($_POST["guardar"])){
             <dt>
                 <div class=" well well-small"><b>Administrador</b></div></dt>
            <?php $SQL5="SELECT nombre FROM administrador WHERE administradorid=".$_SESSION["id_usuario"];
-		$result5 = pg_query ($conn, $SQL5 ) or die("Error en la consulta SQL");
-		$row5 = pg_fetch_array ($result5); ?>
+		$result5 = mysql_query ( $SQL5,$conn ) or die("Error en la consulta SQL");
+		$row5 = mysql_fetch_array ($result5); ?>
              <dd>
                 <div class=" well well-small"><?php echo $row5["nombre"];?></div>
              </dd>  

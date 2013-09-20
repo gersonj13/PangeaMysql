@@ -12,8 +12,8 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
   }else {
 	  
 	  $SQLi="SELECT * FROM menu WHERE menuid=".$_GET['id'];
-		$resulti = pg_query ($conn, $SQLi ) or die("Error en la consulta SQL");
-		$registrosi= pg_num_rows($resulti);
+		$resulti = mysql_query ( $SQLi,$conn ) or die("Error en la consulta SQL");
+		$registrosi= mysql_num_rows($resulti);
 		if($registrosi==0){
 		  iraURL('../administrator/menu.php');	
 		}
@@ -26,7 +26,7 @@ if(isset($_POST["guardar"])){
 		
 		$nombr=$_POST['nombre'];
 		$enla=$_POST['enlace'];
-        $resultado=pg_query($conn,"UPDATE menu SET nombre='$nombr', enlace='$enla' where menuid=".$_GET['id']) or die(pg_last_error($conn));
+        $resultado=mysql_query($conn,"UPDATE menu SET nombre='$nombr', enlace='$enla' where menuid=".$_GET['id']) or die(mysql_error($conn));
 		if($resultado){
 			llenarLog(2, "tipo de administrador");
 javaalert("El menu fue modificado con exito");
@@ -113,8 +113,8 @@ iraURL("menu.php");
       <?php 
 		
 		$SQL="SELECT * FROM menu WHERE menuid=".$_GET['id'];
-		$result = pg_query ($conn, $SQL ) or die("Error en la consulta SQL");
-		$registros= pg_num_rows($result);
+		$result = mysql_query ( $SQL,$conn ) or die("Error en la consulta SQL");
+		$registros= mysql_num_rows($result);
 		
 	
 	?>
@@ -138,7 +138,7 @@ iraURL("menu.php");
 		for ($i=0;$i<$registros;$i++)
 			{
 
-			$row = pg_fetch_array ($result,$i );
+			$row = mysql_fetch_array ($result,$i );
 			?>
 		
 		
@@ -162,8 +162,8 @@ iraURL("menu.php");
 				
 				 if($row["submenu"]!="0"){
 			$SQL2="SELECT * FROM menu WHERE menuid=".$row["submenu"];
-		$result2 = pg_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
-		$row2 = pg_fetch_array ($result2);
+		$result2 = mysql_query ( $SQL2,$conn ) or die("Error en la consulta SQL");
+		$row2 = mysql_fetch_array ($result2);
 	 echo $row2["nombre"];
 			 }else{
 				 echo $row["submenu"];
@@ -181,8 +181,8 @@ iraURL("menu.php");
                 <?php
 				
 				$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
-		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
-		$row3 = pg_fetch_array ($result3);
+		$result3 = mysql_query ( $SQL3,$conn ) or die("Error en la consulta SQL");
+		$row3 = mysql_fetch_array ($result3);
 				
 				 echo $row3["nombre"]?>
 				 
