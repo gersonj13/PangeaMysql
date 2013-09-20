@@ -11,7 +11,7 @@ if(isset($_GET['s']))
 {
 	
 	$SQL="update menu set orden=(orden-1) where menuid=".$_GET['s']."";
-    $result = mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
+    $result = mysql_query ($conn,$SQL) or die("Error en la consulta SQL");
 	
 	
 }
@@ -19,7 +19,7 @@ if(isset($_GET['b']))
 {
 	
 	$SQL="update menu set orden=(orden+1) where menuid=".$_GET['b']."";
-    $result = mysql_query ($SQL,$conn) or die("Error en la consulta SQL");
+    $result = mysql_query ($conn,$SQL) or die("Error en la consulta SQL");
 	
 	
 }	
@@ -136,15 +136,15 @@ if(isset($_GET['b']))
 		for ($i=0;$i<$registros;$i++)
 			{
 
-			$row = pg_fetch_array ($result,$i );
+			$row = mysql_result($result,$i );
 			 if($row["submenu"]=="0"){
 			echo '<tr>';
 			echo '<td width="10%">'.$row["menuid"].'</td>';
 			echo '<td width="15%">'.$row["nombre"].' </td>';
 			echo'<td width="5%"> <a href="submenu.php?id='.$row["menuid"].'"> <i id="add" class="icon-plus" /> </td> </a>';
 			$SQL3="SELECT nombre FROM administrador WHERE administradorid=".$row["administradorid"];
-		$result3 = pg_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
-		$row3 = pg_fetch_array ($result3);
+		$result3 = mysql_query ($SQL3,$conn) or die("Error en la consulta SQL");
+		$row3 = mysql_result ($result3);
 		echo '<td width="10%">'.$row3["nombre"].' </td>';
 		echo '<td width="15%">'.$row["enlace"].' </td>';	
 		echo '<td width="4%">'.$row["orden"].' </td>';	  
