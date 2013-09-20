@@ -72,7 +72,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <?php
 		$ban=false;
 		$SQL9="SELECT * FROM administrador WHERE tipoadministradorid=".$_SESSION["admin"];
-		$result9 = mysql_query ($conn, $SQL9) or die("Error en la consulta SQL");
+		$result9 = mysql_query ($SQL9, $conn) or die("Error en la consulta SQL");
 		$row9 = mysql_fetch_array ($result9);
 		$reg= mysql_num_rows($result9);
 		if($reg= mysql_num_rows($result9)){
@@ -99,7 +99,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <?php
 		
 		$SQL="SELECT * FROM administrador";
-		$result = mysql_query($conn, $SQL ) or die("Error en la consulta SQL");
+		$result = mysql_query($SQL, $conn) or die("Error en la consulta SQL");
 		$registros= mysql_num_rows($result);
 
      	if($registros == 0){
@@ -147,7 +147,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <?php    
 		for ($i=0;$i<$registros;$i++){
 
-			$row = mysql_fetch_array ($result,$i);
+			$row = mysql_fetch_array($result);
 			
 			echo '<tr>';
 			echo '<td width="10%">'.$row["administradorid"].'</td>';
