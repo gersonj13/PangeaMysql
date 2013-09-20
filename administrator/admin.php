@@ -136,7 +136,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 				<span class="add-on"><i class="icon-eye-open"></i></span> Ver 
 				  </th>
                   <th data-hide="phone,mediatablet" data-sort-ignore="true">
-					<span class="add-on"><i class="icon-trash"></i></span> Bitacora 
+					<span class="add-on"><i class="icon-trash"></i></span> Bitácora 
 				  </th>
 				</tr>
 			  </thead>
@@ -157,7 +157,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			echo '<td width="14%"> <a href="editaradmin.php?id='.$row["administradorid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 			echo '<td width="15%"> <a href="eliminaradmin.php?id='.$row["administradorid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';
 			echo '<td width="12%"> <a href="veradmin.php?id='.$row["administradorid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-eye-open"></i> </span> Ver  </button>  </td></a>';
-			echo '<td width="15%"> <a href="vaciarbitacoraadmin.php?id='.$row["administradorid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Bitacora  </button>  </td></a>';
+			echo '<td width="15%"> <a href="vaciarbitacoraadmin.php?id='.$row["administradorid"].'"> <button class="btn btn-primary"  type="button" name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Bitácora  </button>  </td></a>';
 			}else{
 		echo '<td width="14%"> <a href="editaradmin.php?id='.$row["administradorid"].'"> <button class="btn btn-primary" disabled  type="button" name="boton"> <span class="add-on"><i class="icon-pencil"></i> </span> Editar  </button>  </td></a>';
 			echo '<td width="15%"> <a href="eliminaradmin.php?id='.$row["administradorid"].'"> <button class="btn btn-primary" disabled  type="button" name="boton"> <span class="add-on"><i class="icon-trash"></i> </span> Eliminar  </button>  </td></a>';

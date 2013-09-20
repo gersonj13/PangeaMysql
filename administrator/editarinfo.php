@@ -24,7 +24,7 @@ if(isset($_POST["guardar"])){
 		$enlace=$_POST['enlace'];
 		$tipoinfo=$_POST['tipoinfo'];
 	
-		$resultado=mysql_query($conn,"UPDATE informacion SET titulo='$titulo', descripcion='$descripcion', enlace='$enlace', tipoinformacionid='$tipoinfo' WHERE informacionid=$id") or die(mysql_error($conn));
+		$resultado=mysql_query("UPDATE informacion SET titulo='$titulo', descripcion='$descripcion', enlace='$enlace', tipoinformacionid='$tipoinfo' WHERE informacionid=$id", $conn) or die(mysql_error($conn));
 	
 		if($_FILES['imagen']['name']!=""){
 		
@@ -51,7 +51,7 @@ if(isset($_POST["guardar"])){
 				//Nueva función
 			   	move_uploaded_file($imagen,$uploadfile);			
 				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=$id";
-				$result= mysql_query($conn, $sql_update);																									
+				$result= mysql_query($sql_update, $conn);																									
 			}	
 		 }
 		 
@@ -138,7 +138,7 @@ if(isset($_POST["guardar"])){
         
         <?php
         	$cons="SELECT * FROM informacion WHERE informacionid=$id";
-			$resulta = mysql_query ($conn, $cons) or die("Error en la consulta SQL");
+			$resulta = mysql_query ($cons, $conn) or die("Error en la consulta SQL");
 			
 			if($row=mysql_fetch_array($resulta)){
 		?>
@@ -178,7 +178,7 @@ if(isset($_POST["guardar"])){
                 <?php if($row['imagen']!=""){?>
                   <img src="<?php echo "../".$row['imagen'];?> ">
                   <?php }?>
-                	<input id="imagen" name="imagen" type="file" contenteditable="true"/>
+                	<input id="imagen" name="imagen" type="file"/>
                 	</br>
                     <ul>
                 		<li>Redes Sociales 40*40</li>
@@ -197,14 +197,14 @@ if(isset($_POST["guardar"])){
                     <?php 
 						
 						$consu1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
-						$resulta3 = mysql_query ($conn, $consu1) or die("Error en la consulta SQL");
+						$resulta3 = mysql_query ($consu1, $conn) or die("Error en la consulta SQL");
 						if($row3=mysql_fetch_array($resulta3)){
 							echo '<option value="'.$row3['tipoinformacionid'].'">'.$row3['nombre'].'</option>';
                         
                         }
 		
 						$SQL="SELECT * FROM tipoinformacion WHERE tipoinformacionid!=".$row['tipoinformacionid'];
-						$resulta4= mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$resulta4= mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
 						
 						while($row4=mysql_fetch_array($resulta4)){
 							echo '<option value="'.$row4['tipoinformacionid'].'">'.$row4['nombre'].'</option>';

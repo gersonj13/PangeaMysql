@@ -18,12 +18,13 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		$enlace=$_POST['enlace'];
 		$tipoinfo=$_POST['tipoinfo'];
 		
-		$resultado=mysql_query($conn,"INSERT INTO informacion values( nextval('informacion_informacionid_seq'),'$titulo','$descripcion','$enlace','','$tipoinfo',".$_SESSION["id_usuario"].")") or die(pg_last_error($conn));
+		$resultado=mysql_query("INSERT INTO informacion values( default,'$titulo','$descripcion','$enlace','','$tipoinfo',".$_SESSION["id_usuario"].")", $conn) or die(pg_last_error($conn));
 	
-		$sql_select="SELECT last_value FROM informacion_informacionid_seq;";
-		$results=mysql_query($conn, $sql_select);
-		$arreglo=mysql_fetch_array($results,0);
-	
+		$rs = mysql_query("SELECT MAX(informacionid) AS id FROM informacion");
+        if ($row = mysql_fetch_row($rs)) {
+        	$arreglo = trim($row[0]);        
+        }
+			
 		if($_FILES['imagen']['name']!=""){
 		
 			$caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; //posibles caracteres a usar
@@ -48,8 +49,8 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 				
 				//Nueva función
 			   	move_uploaded_file($imagen,$uploadfile);			
-				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid=".$arreglo[0]."";
-				$result= mysql_query($conn, $sql_update);																									
+				$sql_update="update informacion set imagen='".$uploadfile2."' where informacionid='".$arreglo."'";
+				$result= mysql_query($sql_update, $conn);																									
 			}		
 		 }
 	
@@ -161,7 +162,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
                         <?php
 		
 						$SQL="SELECT * FROM tipoinformacion";
-						$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+						$result = mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
 						
 						while($row=mysql_fetch_array($result)){
 							echo '<option value="'.$row['tipoinformacionid'].'">'.$row['nombre'].'</option>';

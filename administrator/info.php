@@ -86,16 +86,16 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		   $SQL=$SQL." where tipoinformacionid=".$_GET['t'];	
 			
 		}
-		$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$result = mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
 		$registros= mysql_num_rows($result);
 		$cons1="SELECT * FROM tipoinformacion order by nombre asc";
-	    $resulta2=mysql_query ($conn, $cons1) or die("Error en la consulta SQL");
+	    $resulta2=mysql_query ($cons1, $conn) or die("Error en la consulta SQL");
 		?>
          <div class="well well-small">
     <ul class="breadcrumb">
     <li><a href="info.php">Todos</a> <span class="divider">/</span></li>
-    <?php for($i=0;$i<pg_num_rows($resulta2);$i++) {
-		$tip=mysql_fetch_array($resulta2,$i);
+    <?php for($i=0;$i<mysql_num_rows($resulta2);$i++) {
+		$tip=mysql_fetch_array($resulta2);
 		?>
   <li><a href="info.php?t=<?php echo $tip[0]; ?>"><?php echo $tip[1]; ?></a> <span class="divider">/</span></li>
    <?php }?>
@@ -147,7 +147,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <?php    
 		for ($i=0;$i<$registros;$i++){
 
-			$row = pg_fetch_array ($result,$i);
+			$row = mysql_fetch_array ($result);
 			
 			echo '<tr>';
 			echo '<td width="10%">'.$row["informacionid"].'</td>';
@@ -160,7 +160,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 			}
 			
 			$cons1="SELECT * FROM tipoinformacion WHERE tipoinformacionid=".$row['tipoinformacionid'];
-			$resulta2=mysql_query ($conn, $cons1) or die("Error en la consulta SQL");
+			$resulta2=mysql_query ($cons1, $conn) or die("Error en la consulta SQL");
 			if($row1=mysql_fetch_array($resulta2)){
 				echo '<td width="14%">'.$row1["nombre"].'</td>';
 			}

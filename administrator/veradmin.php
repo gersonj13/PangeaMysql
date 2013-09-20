@@ -82,7 +82,7 @@ $id=$_GET['id'];
         
         <?php
         	$cons="SELECT * FROM administrador WHERE administradorid=$id";
-			$resulta = mysql_query ($conn, $cons) or die("Error en la consulta SQL");
+			$resulta = mysql_query ($cons, $conn) or die("Error en la consulta SQL");
 			
 			if($row=mysql_fetch_array($resulta)){
 		?>
@@ -99,7 +99,7 @@ $id=$_GET['id'];
 				if($row['creadorid']!=''){
 				
 					$cons1="SELECT * FROM administrador WHERE administradorid=".$row['creadorid'];
-					$resulta2=mysql_query ($conn, $cons1) or die("Error en la consulta SQL");
+					$resulta2=mysql_query ($cons1, $conn) or die("Error en la consulta SQL");
 					if($row1=mysql_fetch_array($resulta2)){
 					?>
             			<div class="span3 well well-small"><b>Creador</b></div>
@@ -108,7 +108,7 @@ $id=$_GET['id'];
                 }?>
                 <?php 
 				$cons1="SELECT * FROM tipoadministrador WHERE tipoadministradorid=".$row['tipoadministradorid'];
-				$resulta2=mysql_query ($conn, $cons1) or die("Error en la consulta SQL");
+				$resulta2=mysql_query ($cons1, $conn) or die("Error en la consulta SQL");
 				if($row1=mysql_fetch_array($resulta2)){
 				?>
             	<div class="span3 well well-small"><b>Tipo de Administrador</b></div>

@@ -15,7 +15,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	
 if(isset($_POST["si"])){
 	$SQL="DELETE FROM administrador WHERE administradorid=".$_GET['id'];
-	$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+	$result = mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
 	javaalert("El Administrador fue Eliminado");
 	llenarLog(3, "Administrador");
 	iraURL('../administrator/admin.php');
@@ -98,7 +98,7 @@ if(isset($_POST["no"])){
       <?php 
 		
 		$SQL="SELECT * FROM administrador WHERE administradorid=".$_GET['id'];
-		$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$result = mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
 		$registros= mysql_num_rows($result);
 		$row = mysql_fetch_array ($result);
 		
@@ -108,19 +108,19 @@ if(isset($_POST["no"])){
 
 		
 		$SQL2="SELECT * FROM administrador WHERE creadorid=".$_GET['id'];
-		$result2 = mysql_query ($conn, $SQL2 ) or die("Error en la consulta SQL");
+		$result2 = mysql_query ($SQL2, $conn) or die("Error en la consulta SQL");
 		$registros2= mysql_num_rows($result2);
 		
 		$SQL3="SELECT * FROM informacion WHERE administradorid=".$_GET['id'];
-		$result3 = mysql_query ($conn, $SQL3 ) or die("Error en la consulta SQL");
+		$result3 = mysql_query ($SQL3, $conn) or die("Error en la consulta SQL");
 		$registros3= mysql_num_rows($result3);
 		
 		$SQL4="SELECT * FROM usuario WHERE administradorid=".$_GET['id'];
-		$result4 = mysql_query ($conn, $SQL4 ) or die("Error en la consulta SQL");
+		$result4 = mysql_query ($SQL4, $conn) or die("Error en la consulta SQL");
 		$registros4= mysql_num_rows($result4);
 		
 		$SQL5="SELECT * FROM bitacora WHERE administradorid=".$_GET['id'];
-		$result5 = mysql_query ($conn, $SQL5 ) or die("Error en la consulta SQL");
+		$result5 = mysql_query ($SQL5, $conn) or die("Error en la consulta SQL");
 		$registros5= mysql_num_rows($result5);
 		
 		if($registros2!=0 || $registros3!=0 || $registros4!=0 || $registros5!=0){

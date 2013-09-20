@@ -26,7 +26,7 @@ if(isset($_POST["guardar"]) || isset($_POST["guardar2"])){
 		if($registros == 0){
 
 			if($_POST["contrasena"]==$_POST["contrasena_c"]){
-				$resultado=mysql_query("INSERT INTO administrador values('','$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')",$conn) or die(mysql_error($conn));
+				$resultado=mysql_query("INSERT INTO administrador values(default,'$nombre','$apellido','$usuario','$contrasena',".$_SESSION["id_usuario"].",'$tipoadmin')",$conn) or die(mysql_error($conn));
 	
 				if($resultado){
 					javaalert('Se Creo un Administrador');

@@ -15,7 +15,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 		
 if(isset($_POST["si"])){
 	$SQL="DELETE FROM informacion WHERE informacionid=".$_GET['id'];
-	$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+	$result = mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
 	javaalert("La Información fue Eliminada");
 	llenarLog(3, "Información");
 	iraURL('../administrator/info.php');
@@ -97,7 +97,7 @@ if(isset($_POST["no"])){
       <?php 
 		
 		$SQL="SELECT * FROM informacion WHERE informacionid=".$_GET['id'];
-		$result =mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+		$result =mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
 		$registros=mysql_num_rows($result);
 		$row = mysql_fetch_array ($result);
 	

@@ -13,7 +13,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 }
 	
 	$SQL="DELETE FROM bitacora WHERE administradorid=".$_GET['id'];
-	$result = mysql_query ($conn, $SQL ) or die("Error en la consulta SQL");
+	$result = mysql_query ($SQL, $conn) or die("Error en la consulta SQL");
 	javaalert("La Bitacora para ese Administrador fue Vaciada");
 	llenarLog(6, "Bitacora");
 	iraURL('../administrator/admin.php');
