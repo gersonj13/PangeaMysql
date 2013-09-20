@@ -62,7 +62,7 @@ iraURL("crearmenu.php");
 <meta name="description" content="Pagina Web"/>
 <meta name="author" content="Pangea Technologies"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta charset="utf-8">
+<meta charset="iso-8859-1">
 <link href="../recursos/css/bootstrap.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">

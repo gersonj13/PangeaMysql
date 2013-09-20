@@ -2,7 +2,7 @@
 session_start();
 include("recursos/funciones.php");
 $conn=conectar();
-//inicio de sesi√≥n 
+//inicio de sesiÛn 
 if (isset($_POST["inicio"])) {
    iniciosesion_cliente($_POST["usuario"],$_POST["password"]);
 }
@@ -14,7 +14,7 @@ if (isset($_POST["inicio"])) {
 <meta name="description" content="Pagina Web"/>
 <meta name="author" content="Pangea Technologies"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta charset="utf-8" />
+<meta charset="iso-8859-1" />
 <link rel=StyleSheet href="recursos/css/bootstrap.min.css" type="text/css" />
 <link rel=StyleSheet href="recursos/animate/animate.css" type="text/css" />
 <link rel=StyleSheet href="recursos/css/estilogeneral.css" type="text/css" />
@@ -60,21 +60,21 @@ if (isset($_POST["inicio"])) {
 						'.$_SESSION["nombre"].' '.$_SESSION["apellido"].'
 						<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-						<li><a href="recursos/quitarsesioncliente.php?pagina=../index.php">Cerrar Sesi√≥n</a></li>
+						<li><a href="recursos/quitarsesioncliente.php?pagina=../index.php">Cerrar SesiÛn</a></li>
 						  </ul></li>';			
 				  }else{ ?>
-                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Iniciar Sesi√≥n <b class="caret"></b></a>
+                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Iniciar Sesi&oacute;n <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li>
                       <div class="well well-small" align="center"> 
                       <form method="post">
                         <dl>
                           <dt><span>Nombre de usuario</span></dt>
-                          <dd><input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es May√∫scula(letras, puntos o n√∫meros)" maxlength="34" pattern="[A-Z√ë]{1}[a-z.√±0-9]{1,33}" autofocus required></dd>
-                          <dt>    <span>Contrase√±a</span></dt>
-                         <dd>     <input type="password"  placeholder="Contrase√±a" name="password" id="password" maxlength="34"  title="Debe agregar la contrase√±a" required></dd>
+                          <dd><input type="text"  placeholder="Usuario" name="usuario" id="usuario"  title="El formato es May˙scula(letras, puntos o n˙meros)" maxlength="34" pattern="[A-Z—]{1}[a-z.Ò0-9]{1,33}" autofocus required></dd>
+                          <dt>    <span>Contrase&ntilde;a</span></dt>
+                         <dd>     <input type="password"  placeholder="ContraseÒa" name="password" id="password" maxlength="34"  title="Debe agregar la contraseÒa" required></dd>
                          <dt>         </dt>
-                         <dd><button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesi√≥n</button>
+                         <dd><button type="submit" id="inicio" name="inicio" class="btn submit">Iniciar Sesi&oacute;n</button>
                      </dd>
                         </dl>
                       </form>
@@ -160,7 +160,7 @@ if (isset($_POST["inicio"])) {
       <div class="container">
         <div class="well well-small">
           <p class="muted credit">Pangea Technologies | RIF: J-29521849-0
-            Copyright ¬© 2013. All rights reserved.</p>
+            Copyright &copy; 2013. All rights reserved.</p>
         </div>
       </div>
     </div>
