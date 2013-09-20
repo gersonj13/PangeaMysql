@@ -15,7 +15,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <meta name="description" content="Pagina Web"/>
 <meta name="author" content="Pangea Technologies"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta charset="iso-8859-1">
+<meta charset="utf-8">
 <link href="../recursos/css/bootstrap.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursoscss/bootstrap-responsive.css" rel="stylesheet">
@@ -34,28 +34,28 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="principal.php">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
           <ul class="nav">
-            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gesti&oacute;n Usuarios <b class="caret"></b> </a>
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestión Usuarios <b class="caret"></b> </a>
               <ul class="dropdown-menu">
                 <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
                 <li><a href="admin.php">Administrador</a></li>
                 <li><a href="usuario.php">Usuario</a></li>
               </ul>
             </li>
-            <li><a href="menu.php"> Men&uacute;</a></li>
+            <li><a href="menu.php"> Menú</a></li>
             <li class="active"><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li class="dropdown">
              <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
-              Gesti&oacute;n Informaci&oacute;n <b class="caret"></b> </a>
+              Gestión Información <b class="caret"></b> </a>
               <ul class="dropdown-menu">
-                <li><a href="tipoinfo.php">Tipo Infomaci&oacute;n</a></li>
-                <li><a href="info.php">Informaci&oacute;n</a></li>
+                <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+                <li><a href="info.php">Información</a></li>
               </ul>
             </li>
               <?php if(supera($_SESSION["admin"])){
-            ?><li><a href="bitacora.php"> Bit&aacute;cora</a></li>
+            ?><li><a href="bitacora.php"> Bitácora</a></li>
            <?php }?>
-            <li><a href="cerrarsesion.php">Cerrar Sesi&oacute;n</a></li>
+            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -73,7 +73,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
         
           <ul class="nav  nav-pills nav-stacked">
               <li class="active"><a href="crearproducto.php"> <span class="add-on"><i class="icon-plus "></i></span> Crear </a></li>
-              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atr&aacute;s</a></li>
+              <li><a href="principal.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás</a></li>
           </ul>
       </div>
     </div>
@@ -89,7 +89,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 	if($registros == 0){
     ?>
     <div class="alert alert-block" align="center">
-   			<h2 style="color:rgb(255,255,255)"> Atenci&oacute;n</h2>
+   			<h2 style="color:rgb(255,255,255)"> Atención</h2>
     <h4>No existen registros en producto</h4>
    
    
@@ -110,7 +110,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					<span>Nombre</span>
 				  </th>
 				  <th data-hide="phone" data-sort-ignore="true">
-					Descripci&oacute;n
+					Descripción
 				  </th>
                     <th data-hide="phone" data-sort-ignore="true">
 					Enlace

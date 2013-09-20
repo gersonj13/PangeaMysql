@@ -40,7 +40,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 					
 					if($error==UPLOAD_ERR_OK){ 
 							
-							//Nueva funci�n
+							//Nueva función
 			   				move_uploaded_file($imagen,$uploadfile);		
 							$sql_update="update PRODUCTO set imagen='".$uploadfile2."' where productoid=".$arreglo[0]."";
 							$result= pg_query($conn, $sql_update);
@@ -69,7 +69,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <meta name="description" content="Pagina Web"/>
 <meta name="author" content="Pangea Technologies"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta charset="iso-8859-1">
+<meta charset="utf-8">
 <link href="../recursos/css/bootstrap.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap.min.css" rel="stylesheet">
 <link href="../recursos/css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -88,28 +88,28 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
       <div class="container" style="width: auto;"> <a class="btn btn-navbar" href="#nav" data-toggle="collapse" data-target="#barrap"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a  class="brand" id="brand-admin" href="principal.php">PANGEATECH</a>
         <div id="barrap" class="nav-collapse collapse">
          <ul class="nav">
-            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gesti&oacute;n Usuarios <b class="caret"></b> </a>
+            <li class="dropdown"> <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown"> Gestión Usuarios <b class="caret"></b> </a>
               <ul class="dropdown-menu">
                 <li><a href="tipoadmin.php"> Tipo Administrador </a></li>
                 <li><a href="admin.php">Administrador</a></li>
                 <li><a href="usuario.php">Usuario</a></li>
               </ul>
             </li>
-            <li><a href="menu.php"> Men&uacute;</a></li>
+            <li><a href="menu.php"> Menú</a></li>
             <li class="active"><a href="producto.php">Producto</a></li>
             <li><a href="sucursal.php">Sucursal</a></li>
             <li class="dropdown">
              <a  class="dropdown-toggle" data-target="#" data-toggle="dropdown">
-              Gesti&oacute;n Informaci&oacute;n <b class="caret"></b> </a>
+              Gestión Información <b class="caret"></b> </a>
               <ul class="dropdown-menu">
-                <li><a href="tipoinfo.php">Tipo Infomaci&oacute;n</a></li>
-                <li><a href="info.php">Informaci&oacute;n</a></li>
+                <li><a href="tipoinfo.php">Tipo Infomación</a></li>
+                <li><a href="info.php">Información</a></li>
               </ul>
             </li>
               <?php if(supera($_SESSION["admin"])){
-            ?><li><a href="bitacora.php"> Bit&aacute;cora</a></li>
+            ?><li><a href="bitacora.php"> Bitácora</a></li>
            <?php }?>
-            <li><a href="cerrarsesion.php">Cerrar Sesi&oacute;n</a></li>
+            <li><a href="cerrarsesion.php">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- /.nav-collapse --> 
@@ -125,22 +125,22 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
     <div class="span3">
  <div style="text-align:center">        
                   <ul class="nav  nav-pills nav-stacked">
-              <li class="active"><a href="producto.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atr&aacute;s </a></li>
+              <li class="active"><a href="producto.php"> <span class="add-on"><i class="icon-arrow-left"></i></span> Atrás </a></li>
           </ul>
       </div>
     </div>
      <div class="span9 well well-large" >
  			<p>
         <div class="span3 well well-small"><b>Nombre</b></div>
-            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" maxlength="249" title="Ingrese el nombre" placeholder="Ej. Sistema de Comercializaci�n" autofocus required/></div>
-            <div class="span3 well well-small"><b>Descripci&oacute;n</b></div>
+            <div class="span6 well well-small "><input type="text" name="nombre" id="nombre" maxlength="249" title="Ingrese el nombre" placeholder="Ej. Sistema de Comercialización" autofocus required/></div>
+            <div class="span3 well well-small"><b>Descripción</b></div>
             <div class="span6 well well-small"><textarea id="redactor" name="redactor" maxlength="2499" required></textarea></div>
              <div class="span3 well well-small"><b>Enlace</b></div>
             <div class="span6 well well-small"><input type="text" name="enlace" id="enlace" maxlength="249" title="Ingrese el enlace" placeholder="Ej. http:/..."  required/></div>
              <div class="span3 well well-small"><b>Imagen</b></div>
             <div class="span6 well well-small"><input id="imagen" name="imagen" type="file" maxlength="249" required/></div>
             <div class="span9 well well-small" align="center"><button class="btn btn-primary" id="crear_uno" name="crear_uno" type="submit">Guardar</button></div>
-			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y a&ntilde;adir otro</button></div>
+			<div class="span9 well well-small" align="center"> <button class="btn btn-primary" id="crear_otro" name="crear_otro" type="submit">Guardar y añadir otro</button></div>
 
             </p>
     </div>

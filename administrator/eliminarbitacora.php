@@ -16,7 +16,7 @@ if(!isset($_SESSION["usuarioadmin"]) || !isset($_SESSION["passwordadmin"])){
 <meta name="description" content="Pagina Web"/>
 <meta name="author" content="Pangea Technologies"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta charset="iso-8859-1">
+<meta charset="utf-8">
 </head>
 
 <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
